@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package turismogoro.Entidades;
 
 /**
  *
- * @author Usuario
+ * @author Susana
  */
 public class Pasaje {
     private int idPasajero;
@@ -76,7 +71,8 @@ public class Pasaje {
 
     @Override
     public String toString() {
-        return "Pasaje{" + "idPasajero=" + idPasajero + ", tipoTransporte=" + tipoTransporte + ", importe=" + importe + ", nombreCiudad=" + nombreCiudad + ", estado=" + estado + '}';
+        String titulo= "Pasaje: " + "idPasajero= " + idPasajero + ", Transporte= " + tipoTransporte + ", Importe= $" + importe + ", Ciudad= " + nombreCiudad ;
+    return titulo;
     }
     
     
