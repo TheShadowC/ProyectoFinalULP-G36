@@ -1,10 +1,10 @@
 package AccesoADatos;
 
-import entidades.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import turismogoro.Entidades.Ciudad;
 
 /**
  *
@@ -22,12 +22,13 @@ public class Ciudad_Data {
     }
     
     public void guardarCiudad(Ciudad ciudad) {
-        String sql = "INSERT INTO ciudad(nombre, provincia,pais) VALUES(?,?,?)";
+        String sql = "INSERT INTO ciudad(nombre,provincia,pais,estado) VALUES(?,?,?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, ciudad.getNombre());
             ps.setString(2, ciudad.getProvincia());
             ps.setString(3, ciudad.getPais());
+            ps.setBoolean(4, ciudad.isEstado());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -40,7 +41,7 @@ public class Ciudad_Data {
         }
     }
 
-    public List<Ciudad> obtenerCiudades(Ciudad ciudadDestino) {
+    public List<Ciudad> obtenerCiudades() {
         List<Ciudad> ciudades = new ArrayList<>();
 
         try {
@@ -57,6 +58,7 @@ public class Ciudad_Data {
                 ciudad.setNombre(rs.getString("nombre"));
                 ciudad.setProvincia(rs.getString("provincia"));
                 ciudad.setPais(rs.getString("pais"));
+                ciudad.setEstado(rs.getBoolean("estado"));
 
                 ciudades.add(ciudad);
             }
@@ -70,5 +72,25 @@ public class Ciudad_Data {
 
         return ciudades;
     }
+    
+    
+    public void eliminarCiudad(Ciudad c) {
+        
+        try{
+        String sql="UPDATE ciudad SET estado = 0 WHERE nombre = ?";
+        
+        PreparedStatement ps=conn.prepareStatement(sql);
+        ps.setString(1, c.getNombre());
+        int fila=ps.executeUpdate();
+        if(fila==1){
+               JOptionPane.showMessageDialog(null, "Se elimino la Ciudad." );
 
+        }
+        ps.close();
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, "Error al acceder a la atabla Ciudad " + ex.getMessage());
+        }
+    }
+    
 }
