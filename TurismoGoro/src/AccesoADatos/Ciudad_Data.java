@@ -73,6 +73,31 @@ public class Ciudad_Data {
         return ciudades;
     }
     
+    public void modificarCiudad(Ciudad ciudad) {
+        String sql = "UPDATE ciudad SET nombre =?, provincia =?, pais=?, estado=? WHERE idCiudad=?";
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, ciudad.getNombre());
+            ps.setString(2, ciudad.getProvincia());
+            ps.setString(3, ciudad.getPais());
+            ps.setBoolean(4, ciudad.isEstado());
+            ps.setInt(5, ciudad.getIdCiudad());
+            int exito=ps.executeUpdate();
+            
+            if (exito ==1){
+                JOptionPane.showMessageDialog(null, "Modificado exitosamente.");
+
+            }else {
+                 JOptionPane.showMessageDialog(null, "La Ciudad no existe en la Base de Datos.");
+
+            
+        }} catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Ciudad" + ex.getMessage());
+        }
+    }
+    
     
     public void eliminarCiudad(Ciudad c) {
         
