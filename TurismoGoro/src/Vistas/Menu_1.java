@@ -65,6 +65,9 @@ public class Menu_1 extends javax.swing.JFrame {
         closeApp.setText("Close");
         closeApp.setAlignmentY(0.0F);
         closeApp.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        closeApp.setBorderPainted(false);
+        closeApp.setContentAreaFilled(false);
+        closeApp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         closeApp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 closeAppActionPerformed(evt);
@@ -109,6 +112,7 @@ public class Menu_1 extends javax.swing.JFrame {
         panelLateral2App.setBounds(0, 50, 229, 550);
 
         alojamientoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/alojamiento.png"))); // NOI18N
+        alojamientoButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         alojamientoButton.setDisabledIcon(null);
         alojamientoButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -119,6 +123,7 @@ public class Menu_1 extends javax.swing.JFrame {
         alojamientoButton.setBounds(490, 250, 94, 80);
 
         ciudadesButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/mapa.png"))); // NOI18N
+        ciudadesButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ciudadesButton.setDisabledIcon(null);
         ciudadesButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -134,6 +139,7 @@ public class Menu_1 extends javax.swing.JFrame {
         ciudadesButton.setBounds(340, 250, 94, 80);
 
         presupuestosButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/presupuesto.png"))); // NOI18N
+        presupuestosButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         presupuestosButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 presupuestosButtonMouseClicked(evt);
@@ -143,6 +149,7 @@ public class Menu_1 extends javax.swing.JFrame {
         presupuestosButton.setBounds(410, 400, 94, 80);
 
         paqueteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/paquete.png"))); // NOI18N
+        paqueteButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         paqueteButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 paqueteButtonMouseClicked(evt);
@@ -152,6 +159,7 @@ public class Menu_1 extends javax.swing.JFrame {
         paqueteButton.setBounds(560, 400, 94, 80);
 
         pasajesButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pasajes.png"))); // NOI18N
+        pasajesButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pasajesButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pasajesButtonMouseClicked(evt);

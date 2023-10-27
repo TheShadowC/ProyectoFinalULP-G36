@@ -22,7 +22,6 @@ public class popupPasajesCity extends javax.swing.JInternalFrame {
             return false;
         }
     };
-    public VentanaPasaje get = new VentanaPasaje();
 
     /**
      * Creates new form popupPasajes
@@ -117,11 +116,7 @@ public class popupPasajesCity extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void pasajesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pasajesTableMouseClicked
-//        this.get.jTIdPasaje.setText((modeloTabla.getValueAt(pasajesTable.getSelectedRow(), 0).toString()));
-//        this.get.idPopUP = modeloTabla.getValueAt(pasajesTable.getSelectedRow(), 0).toString();
-//        System.out.println(this.get.idPopUP);
-//        jLabel1.setText(modeloTabla.getValueAt(pasajesTable.getSelectedRow(), 0).toString());
-        get.recibirIDCiudadO();
+        VentanaPasaje.jTCiudadOrigen.setText((modeloTabla.getValueAt(pasajesTable.getSelectedRow(), 0).toString()));
         this.dispose();
     }//GEN-LAST:event_pasajesTableMouseClicked
 

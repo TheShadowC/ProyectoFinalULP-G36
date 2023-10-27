@@ -123,6 +123,7 @@ public class VentanaCiudad extends javax.swing.JInternalFrame {
 
         jBotonBuscar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jBotonBuscar.setText("Buscar");
+        jBotonBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBotonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBotonBuscarActionPerformed(evt);
@@ -175,6 +176,7 @@ public class VentanaCiudad extends javax.swing.JInternalFrame {
 
         jBotonModificar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jBotonModificar.setText("Modificar");
+        jBotonModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBotonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBotonModificarActionPerformed(evt);
@@ -185,6 +187,7 @@ public class VentanaCiudad extends javax.swing.JInternalFrame {
 
         jBotonNuevo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jBotonNuevo.setText("Nuevo");
+        jBotonNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBotonNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBotonNuevoActionPerformed(evt);
@@ -195,6 +198,7 @@ public class VentanaCiudad extends javax.swing.JInternalFrame {
 
         jBotonGuardar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jBotonGuardar.setText("Guardar");
+        jBotonGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBotonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBotonGuardarActionPerformed(evt);
@@ -205,6 +209,7 @@ public class VentanaCiudad extends javax.swing.JInternalFrame {
 
         jBotonEliminar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jBotonEliminar.setText("Eliminar");
+        jBotonEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBotonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBotonEliminarActionPerformed(evt);
@@ -215,6 +220,7 @@ public class VentanaCiudad extends javax.swing.JInternalFrame {
 
         jBotonActivar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jBotonActivar.setText("Activar");
+        jBotonActivar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBotonActivar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBotonActivarActionPerformed(evt);
@@ -243,6 +249,9 @@ public class VentanaCiudad extends javax.swing.JInternalFrame {
         closeCiudad.setText("Atrás");
         closeCiudad.setAlignmentY(0.0F);
         closeCiudad.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        closeCiudad.setBorderPainted(false);
+        closeCiudad.setContentAreaFilled(false);
+        closeCiudad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         closeCiudad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 closeCiudadActionPerformed(evt);
@@ -278,6 +287,7 @@ public class VentanaCiudad extends javax.swing.JInternalFrame {
 
         clearButton.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         clearButton.setText("Limpiar");
+        clearButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         clearButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clearButtonActionPerformed(evt);

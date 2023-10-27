@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import AccesoADatos.*;
 import Entidades.*;
+import com.sun.glass.events.KeyEvent;
 import com.sun.glass.events.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,11 +96,18 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
         jLIdPasaje.setBounds(270, 210, 71, 17);
 
         jTIdPasaje.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTIdPasaje.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jTIdPasaje.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTIdPasajeKeyTyped(evt);
+            }
+        });
         jDesktopPane1.add(jTIdPasaje);
         jTIdPasaje.setBounds(360, 210, 104, 20);
 
         jBotonBuscar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jBotonBuscar.setText("Buscar");
+        jBotonBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBotonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBotonBuscarActionPerformed(evt);
@@ -119,11 +127,17 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
         jLImporte.setBounds(470, 460, 154, 17);
 
         jTImporte.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTImporte.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTImporteKeyTyped(evt);
+            }
+        });
         jDesktopPane1.add(jTImporte);
         jTImporte.setBounds(640, 460, 104, 23);
 
         jBotonNuevo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jBotonNuevo.setText("Nuevo");
+        jBotonNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBotonNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBotonNuevoActionPerformed(evt);
@@ -134,6 +148,7 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
 
         jBotonGuardar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jBotonGuardar.setText("Guardar");
+        jBotonGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBotonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBotonGuardarActionPerformed(evt);
@@ -144,6 +159,7 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
 
         jBotonEliminar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jBotonEliminar.setText("Eliminar");
+        jBotonEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBotonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBotonEliminarActionPerformed(evt);
@@ -154,6 +170,7 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
 
         jBotonModificar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jBotonModificar.setText("Modificar");
+        jBotonModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBotonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBotonModificarActionPerformed(evt);
@@ -162,8 +179,8 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
         jDesktopPane1.add(jBotonModificar);
         jBotonModificar.setBounds(530, 520, 110, 31);
 
-        jTCiudadDestino.setEditable(false);
         jTCiudadDestino.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTCiudadDestino.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jDesktopPane1.add(jTCiudadDestino);
         jTCiudadDestino.setBounds(450, 330, 203, 23);
 
@@ -175,8 +192,8 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
         jDesktopPane1.add(jLCiudadD2);
         jLCiudadD2.setBounds(310, 290, 109, 17);
 
-        jTCiudadOrigen.setEditable(false);
         jTCiudadOrigen.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTCiudadOrigen.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jDesktopPane1.add(jTCiudadOrigen);
         jTCiudadOrigen.setBounds(450, 290, 203, 23);
 
@@ -236,6 +253,9 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
         closeCiudad.setText("Atrás");
         closeCiudad.setAlignmentY(0.0F);
         closeCiudad.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        closeCiudad.setBorderPainted(false);
+        closeCiudad.setContentAreaFilled(false);
+        closeCiudad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         closeCiudad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 closeCiudadActionPerformed(evt);
@@ -254,7 +274,10 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
         jDesktopPane1.add(jTIdCiudadDestino);
         jTIdCiudadDestino.setBounds(260, 450, 0, 10);
 
-        buscarCiudad2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/check.png"))); // NOI18N
+        buscarCiudad2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lupa.png"))); // NOI18N
+        buscarCiudad2.setBorderPainted(false);
+        buscarCiudad2.setContentAreaFilled(false);
+        buscarCiudad2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buscarCiudad2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buscarCiudad2ActionPerformed(evt);
@@ -263,7 +286,10 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
         jDesktopPane1.add(buscarCiudad2);
         buscarCiudad2.setBounds(660, 330, 30, 30);
 
-        buscarPasajes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/check.png"))); // NOI18N
+        buscarPasajes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lupa.png"))); // NOI18N
+        buscarPasajes.setBorderPainted(false);
+        buscarPasajes.setContentAreaFilled(false);
+        buscarPasajes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buscarPasajes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buscarPasajesActionPerformed(evt);
@@ -272,7 +298,10 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
         jDesktopPane1.add(buscarPasajes);
         buscarPasajes.setBounds(470, 200, 30, 30);
 
-        buscarCiudad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/check.png"))); // NOI18N
+        buscarCiudad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lupa.png"))); // NOI18N
+        buscarCiudad.setBorderPainted(false);
+        buscarCiudad.setContentAreaFilled(false);
+        buscarCiudad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buscarCiudad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buscarCiudadActionPerformed(evt);
@@ -282,6 +311,7 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
         buscarCiudad.setBounds(660, 290, 30, 30);
 
         clearButton.setText("Limpiar");
+        clearButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         clearButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clearButtonActionPerformed(evt);
@@ -299,14 +329,13 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
     private void jBotonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonBuscarActionPerformed
         try {
             jBotonGuardar.setEnabled(false);
+
             Pasaje pasaje = new Pasaje();
-            System.out.println(jTIdPasaje.getText());
             int id = Integer.parseInt(jTIdPasaje.getText());
             String obtenerTipoTransporte;
             pasaje = pasajeData.buscarPasaje(id);
             if (pasaje != null) {
                 obtenerTipoTransporte = pasaje.getTipoTransporte();
-                System.out.println("tipo" + obtenerTipoTransporte);
                 Ciudad cO, cD;
                 cO = ciudadData.buscarCiudad(pasaje.getNombreCiudadO().getIdCiudad());
                 cD = ciudadData.buscarCiudad(pasaje.getNombreCiudadD().getIdCiudad());
@@ -319,6 +348,8 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
                 activarCampos();
                 jBotonModificar.setEnabled(true);
                 jBotonEliminar.setEnabled(true);
+                buscarCiudad.setEnabled(true);
+                buscarCiudad2.setEnabled(true);
             }
         } catch (NumberFormatException es) {
             JOptionPane.showMessageDialog(this, "Debe ingresar un ID valido: " + es);
@@ -332,10 +363,14 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
         limpiarCampos();
         pasaje = null;
         jTIdPasaje.setEnabled(false);
+        jTCiudadOrigen.setEnabled(true);
+        jTCiudadDestino.setEnabled(true);
         jBotonNuevo.setEnabled(true);
         jBotonGuardar.setEnabled(true);
         jBotonEliminar.setEnabled(false);
         jBotonModificar.setEnabled(false);
+        buscarCiudad.setEnabled(true);
+        buscarCiudad2.setEnabled(true);
     }//GEN-LAST:event_jBotonNuevoActionPerformed
 
     private void jBotonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonGuardarActionPerformed
@@ -344,10 +379,10 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
 
         Integer idCO, idCD;
         Ciudad cO, cD;
-        idCO = Integer.parseInt(jTIdCiudadOrigen.getText());
+        idCO = Integer.parseInt(jTCiudadOrigen.getText());
         cO = ciudadData.buscarCiudad(idCO);
         jTCiudadOrigen.setText(cO.getNombre());
-        idCD = Integer.parseInt(jTIdCiudadDestino.getText());
+        idCD = Integer.parseInt(jTCiudadDestino.getText());
         cD = ciudadData.buscarCiudad(idCD);
         jTCiudadDestino.setText(cD.getNombre());
         TipoTransporte tipoTrans = (TipoTransporte) jComboTipoTrans.getSelectedItem();
@@ -366,7 +401,6 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
     private void jBotonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonEliminarActionPerformed
         int id = Integer.parseInt(jTIdPasaje.getText());
         String TipoTransporte = (String) jComboTipoTrans.getSelectedItem();
-        System.out.println(TipoTransporte);
         Double importe = Double.parseDouble(jTImporte.getText());
         int idCiudadD = Integer.parseInt(jTIdCiudadDestino.getText());
         Ciudad ciuD = ciudadData.buscarCiudad(idCiudadD);
@@ -451,6 +485,20 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
         jTIdPasaje.setText("");
     }//GEN-LAST:event_clearButtonActionPerformed
 
+    private void jTIdPasajeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTIdPasajeKeyTyped
+        char caracter = evt.getKeyChar();
+        if ((caracter < '0' || caracter > '9') && (caracter != KeyEvent.VK_BACKSPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTIdPasajeKeyTyped
+
+    private void jTImporteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTImporteKeyTyped
+        char caracter = evt.getKeyChar();
+        if ((caracter < '0' || caracter > '9') && (caracter != KeyEvent.VK_BACKSPACE) && (caracter != KeyEvent.VK_PERIOD)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTImporteKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buscarCiudad;
@@ -472,8 +520,8 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLTipoTrans;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField jTCiudadDestino;
-    private javax.swing.JTextField jTCiudadOrigen;
+    public static javax.swing.JTextField jTCiudadDestino;
+    public static javax.swing.JTextField jTCiudadOrigen;
     private javax.swing.JTextField jTIdCiudadDestino;
     private javax.swing.JTextField jTIdCiudadOrigen;
     public static javax.swing.JTextField jTIdPasaje;
@@ -494,7 +542,8 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
     }
 
     public void desactivarCampos() {
-
+        buscarCiudad.setEnabled(false);
+        buscarCiudad2.setEnabled(false);
         jTIdPasaje.setEnabled(false);
         jTImporte.setEnabled(false);
         jTCiudadDestino.setEnabled(false);
@@ -525,18 +574,4 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
         jTIdCiudadOrigen.setText("");
     }
 
-    public void recibirID() {
-        jTIdPasaje.setText(idPopUP + "");
-        System.out.println(idPopUP + "");
-    }
-
-    public void recibirIDCiudadO() {
-        jTIdCiudadOrigen.setText(idPopUP + "");
-        System.out.println(idPopUP + "");
-    }
-    
-        public void recibirIDCiudadD() {
-        jTIdCiudadDestino.setText(idPopUP + "");
-        System.out.println(idPopUP + "");
-    }
 }
