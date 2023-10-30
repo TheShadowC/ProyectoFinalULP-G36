@@ -1,15 +1,17 @@
-
 package Vistas;
 
-import java.awt.*;
-import java.sql.Date;
-import java.time.*;
-import java.util.List;
+import Popups.popupPresupuestosCO;
+import Popups.popupPresupuestosP;
+import Popups.popupPresupuestosCD;
+import Popups.popupPresupuestosA;
 import javax.swing.table.DefaultTableModel;
 import AccesoADatos.*;
 import Entidades.*;
-import java.util.*;
-import com.toedter.calendar.JDateChooser;
+import com.sun.glass.events.KeyEvent;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,22 +19,22 @@ import javax.swing.JOptionPane;
  * @author Susana
  */
 public class VentanaPresupuesto extends javax.swing.JInternalFrame {
-    private DefaultTableModel modeloTabla = new DefaultTableModel();
-    private Ciudad_Data ciudadData =new Ciudad_Data();
-    private Ciudad ciudad = new Ciudad();
-    private Alojamiento alojamiento =new Alojamiento();
-    private Alojamiento_Data alojamientoData =new Alojamiento_Data();
+
+//    private DefaultTableModel modeloTabla = new DefaultTableModel();
+//    private Ciudad_Data ciudadData = new Ciudad_Data();
+    public static Ciudad ciudadOrigenPaquete = new Ciudad();
+    public static Ciudad ciudadDestinoPaquete = new Ciudad();
+    public static Alojamiento alojamientoPaquete = new Alojamiento();
+    public static Pasaje pasajePaquete = new Pasaje();
+//    private Alojamiento_Data alojamientoData = new Alojamiento_Data();
 
     /**
      * Creates new form VentanaPresupuesto
      */
     public VentanaPresupuesto() {
         initComponents();
-     //   setIconImage(getIconImage());
-        cargarComboCiudad();
-        cargarComboTransporte();
-        cargarComboTipoAlojamiento();
-        armarCabeceraTabla();
+        ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null); //Elimina encabezado de ventana
+        bloquearCampos();
     }
 
     /**
@@ -44,378 +46,634 @@ public class VentanaPresupuesto extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLAlojamiento = new javax.swing.JLabel();
-        jComboAlojamiento = new javax.swing.JComboBox<>();
-        jLCantPasajeros = new javax.swing.JLabel();
-        jSCantPasajeros = new javax.swing.JSpinner();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTablaPresupuesto = new javax.swing.JTable();
-        jBotonModificar = new javax.swing.JButton();
-        jBotonPresupuesto = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jLFechaIngreso = new javax.swing.JLabel();
-        jDateFechaIngreso = new com.toedter.calendar.JDateChooser();
-        jDateFechaEgreso = new com.toedter.calendar.JDateChooser();
-        jLFechaIngreso1 = new javax.swing.JLabel();
-        jLTemporada = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLCiudadOrigen = new javax.swing.JLabel();
-        jComboCiudadOrigen = new javax.swing.JComboBox<>();
-        jComboCiudadDestino = new javax.swing.JComboBox<>();
-        jLCiudadOrigen1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLTipoTransporte = new javax.swing.JLabel();
-        jComboTipoTransporte = new javax.swing.JComboBox<>();
-        jLTipoTransporte1 = new javax.swing.JLabel();
-        jComboTipoAlojamiento = new javax.swing.JComboBox<>();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
+        panelLateral2Ciudad = new javax.swing.JPanel();
+        panelLateral1Ciudad = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        close = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jTCiudadD = new javax.swing.JLabel();
+        jTAlojamiento = new javax.swing.JLabel();
+        jTCiudadO = new javax.swing.JLabel();
+        jTFCD = new javax.swing.JTextField();
+        jTFCO = new javax.swing.JTextField();
+        jBA = new javax.swing.JButton();
+        jBCO = new javax.swing.JButton();
+        jBCD = new javax.swing.JButton();
+        idCO = new javax.swing.JLabel();
+        idCD = new javax.swing.JLabel();
+        jBP = new javax.swing.JButton();
+        jTFTP = new javax.swing.JTextField();
+        jTPasaje = new javax.swing.JLabel();
+        jTFIP = new javax.swing.JTextField();
+        jTImPasaje = new javax.swing.JLabel();
+        jTFCantidadPasajeros = new javax.swing.JTextField();
+        jLCantidadPasajeros = new javax.swing.JLabel();
+        jTFAl2 = new javax.swing.JTextField();
+        jTAl2 = new javax.swing.JLabel();
+        jTFAl1 = new javax.swing.JTextField();
+        jTAl1 = new javax.swing.JLabel();
+        jTAl3 = new javax.swing.JLabel();
+        jTFAl3 = new javax.swing.JTextField();
+        jTPasaje2 = new javax.swing.JLabel();
+        jTCheckIN = new javax.swing.JLabel();
+        checkOUT = new com.toedter.calendar.JDateChooser();
+        checkIN = new com.toedter.calendar.JDateChooser();
+        jLAclaracion1 = new javax.swing.JLabel();
+        temporada1 = new javax.swing.JLabel();
+        temporada1.setVisible(false);
+        jTPasaje4 = new javax.swing.JLabel();
+        jTPasaje5 = new javax.swing.JLabel();
+        jTPasaje6 = new javax.swing.JLabel();
+        jTPasaje7 = new javax.swing.JLabel();
+        jTPasaje8 = new javax.swing.JLabel();
+        precioPasajeT = new javax.swing.JTextField();
+        jTPasaje9 = new javax.swing.JLabel();
+        jTPasaje10 = new javax.swing.JLabel();
+        precioTotal = new javax.swing.JTextField();
+        jBotonCalcular = new javax.swing.JButton();
+        jBotonConfirmar = new javax.swing.JButton();
+        jTPasaje1 = new javax.swing.JLabel();
+        temporada2 = new javax.swing.JLabel();
+        temporada2.setVisible(false);
+        temporada3 = new javax.swing.JLabel();
+        temporada3.setVisible(false);
+        jTCheckOUT1 = new javax.swing.JLabel();
+        precioAlojT = new javax.swing.JTextField();
+        jBotonLimpiar = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+        setBorder(null);
         setTitle("Presupuesto");
+        setMaximumSize(new java.awt.Dimension(800, 600));
+        setMinimumSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(800, 600));
+        getContentPane().setLayout(null);
 
-        jLAlojamiento.setText("Alojamiento");
+        jDesktopPane1.setMaximumSize(new java.awt.Dimension(800, 600));
+        jDesktopPane1.setMinimumSize(new java.awt.Dimension(800, 600));
 
-        jLCantPasajeros.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLCantPasajeros.setText("Cantidad de pasajeros: ");
+        panelLateral2Ciudad.setBackground(new java.awt.Color(255, 204, 51));
+        panelLateral2Ciudad.setPreferredSize(new java.awt.Dimension(229, 410));
 
-        jScrollPane2.setViewportView(jTablaPresupuesto);
-
-        jBotonModificar.setText("modificar");
-
-        jBotonPresupuesto.setText("Presupuesto");
-        jBotonPresupuesto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBotonPresupuestoActionPerformed(evt);
-            }
-        });
-
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
-
-        jLFechaIngreso.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLFechaIngreso.setText("Fecha Ingreso: ");
-
-        jDateFechaIngreso.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jDateFechaIngresoPropertyChange(evt);
-            }
-        });
-
-        jLFechaIngreso1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLFechaIngreso1.setText("Fecha Egreso:  ");
-
-        jLTemporada.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLTemporada.setForeground(new java.awt.Color(0, 51, 153));
-        jLTemporada.setText("TEMPORADA");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDateFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(88, 88, 88)
-                        .addComponent(jLFechaIngreso1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jDateFechaEgreso, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(362, 362, 362)
-                        .addComponent(jLTemporada, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        javax.swing.GroupLayout panelLateral2CiudadLayout = new javax.swing.GroupLayout(panelLateral2Ciudad);
+        panelLateral2Ciudad.setLayout(panelLateral2CiudadLayout);
+        panelLateral2CiudadLayout.setHorizontalGroup(
+            panelLateral2CiudadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 229, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLFechaIngreso1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jDateFechaEgreso, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLFechaIngreso, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jDateFechaIngreso, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))))
-                .addGap(18, 18, 18)
-                .addComponent(jLTemporada, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        panelLateral2CiudadLayout.setVerticalGroup(
+            panelLateral2CiudadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 450, Short.MAX_VALUE)
         );
 
-        jLCiudadOrigen.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLCiudadOrigen.setText("Ciudad Origen: ");
+        jDesktopPane1.add(panelLateral2Ciudad);
+        panelLateral2Ciudad.setBounds(0, 171, 229, 450);
 
-        jComboCiudadOrigen.setMinimumSize(new java.awt.Dimension(30, 20));
+        panelLateral1Ciudad.setBackground(new java.awt.Color(255, 255, 255));
+        panelLateral1Ciudad.setMinimumSize(new java.awt.Dimension(229, 180));
 
-        jComboCiudadDestino.setPreferredSize(new java.awt.Dimension(30, 20));
-        jComboCiudadDestino.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboCiudadDestinoActionPerformed(evt);
-            }
-        });
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/logo2.png"))); // NOI18N
 
-        jLCiudadOrigen1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLCiudadOrigen1.setText("Ciudad Destino: ");
-
-        jLTipoTransporte.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLTipoTransporte.setText("Tipo Transporte: ");
-
-        jLTipoTransporte1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLTipoTransporte1.setText("Tipo Alojamiento");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLTipoTransporte)
-                .addGap(78, 78, 78)
-                .addComponent(jComboTipoTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLTipoTransporte1)
-                .addGap(48, 48, 48)
-                .addComponent(jComboTipoAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(151, 151, 151))
+        javax.swing.GroupLayout panelLateral1CiudadLayout = new javax.swing.GroupLayout(panelLateral1Ciudad);
+        panelLateral1Ciudad.setLayout(panelLateral1CiudadLayout);
+        panelLateral1CiudadLayout.setHorizontalGroup(
+            panelLateral1CiudadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboTipoTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLTipoTransporte)
-                    .addComponent(jLTipoTransporte1)
-                    .addComponent(jComboTipoAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
-        );
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLCiudadOrigen)
-                .addGap(62, 62, 62)
-                .addComponent(jComboCiudadOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(jLCiudadOrigen1)
-                .addGap(34, 34, 34)
-                .addComponent(jComboCiudadDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6))
-            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboCiudadOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLCiudadOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboCiudadDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLCiudadOrigen1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        panelLateral1CiudadLayout.setVerticalGroup(
+            panelLateral1CiudadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLateral1CiudadLayout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(jLAlojamiento))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLCantPasajeros)))
-                        .addGap(68, 68, 68)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jSCantPasajeros, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(235, 235, 235)
-                                .addComponent(jBotonPresupuesto)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jComboAlojamiento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jBotonModificar)
-                .addGap(21, 21, 21))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLAlojamiento)
-                    .addComponent(jComboAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLCantPasajeros)
-                    .addComponent(jSCantPasajeros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBotonPresupuesto))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jBotonModificar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jDesktopPane1.add(panelLateral1Ciudad);
+        panelLateral1Ciudad.setBounds(0, 0, 229, 180);
+
+        close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/flechaAtras.png"))); // NOI18N
+        close.setText("Atrás");
+        close.setAlignmentY(0.0F);
+        close.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        close.setBorderPainted(false);
+        close.setContentAreaFilled(false);
+        close.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        close.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeActionPerformed(evt);
+            }
+        });
+        jDesktopPane1.add(close);
+        close.setBounds(670, 20, 90, 38);
+
+        jLabel1.setFont(new java.awt.Font("Broadway", 3, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("PRESUPUESTO");
+        jDesktopPane1.add(jLabel1);
+        jLabel1.setBounds(370, 50, 220, 50);
+
+        jTCiudadD.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTCiudadD.setText("Destino:");
+        jDesktopPane1.add(jTCiudadD);
+        jTCiudadD.setBounds(240, 210, 80, 17);
+
+        jTAlojamiento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTAlojamiento.setText("Alojamiento:");
+        jDesktopPane1.add(jTAlojamiento);
+        jTAlojamiento.setBounds(240, 290, 100, 17);
+
+        jTCiudadO.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTCiudadO.setText("Origen:");
+        jDesktopPane1.add(jTCiudadO);
+        jTCiudadO.setBounds(240, 180, 80, 17);
+
+        jTFCD.setEditable(false);
+        jTFCD.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jDesktopPane1.add(jTFCD);
+        jTFCD.setBounds(320, 210, 390, 19);
+
+        jTFCO.setEditable(false);
+        jTFCO.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jDesktopPane1.add(jTFCO);
+        jTFCO.setBounds(320, 180, 390, 19);
+
+        jBA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lupa.png"))); // NOI18N
+        jBA.setBorderPainted(false);
+        jBA.setContentAreaFilled(false);
+        jBA.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAActionPerformed(evt);
+            }
+        });
+        jDesktopPane1.add(jBA);
+        jBA.setBounds(320, 280, 66, 40);
+
+        jBCO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lupa.png"))); // NOI18N
+        jBCO.setBorderPainted(false);
+        jBCO.setContentAreaFilled(false);
+        jBCO.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBCO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCOActionPerformed(evt);
+            }
+        });
+        jDesktopPane1.add(jBCO);
+        jBCO.setBounds(700, 160, 66, 40);
+
+        jBCD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lupa.png"))); // NOI18N
+        jBCD.setBorderPainted(false);
+        jBCD.setContentAreaFilled(false);
+        jBCD.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBCD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCDActionPerformed(evt);
+            }
+        });
+        jDesktopPane1.add(jBCD);
+        jBCD.setBounds(710, 200, 66, 40);
+
+        idCO.setBackground(new java.awt.Color(255, 255, 255));
+        idCO.setForeground(new java.awt.Color(255, 255, 255));
+        idCO.setEnabled(false);
+        jDesktopPane1.add(idCO);
+        idCO.setBounds(0, 0, 0, 0);
+
+        idCD.setBackground(new java.awt.Color(255, 255, 255));
+        idCD.setForeground(new java.awt.Color(255, 255, 255));
+        idCD.setEnabled(false);
+        jDesktopPane1.add(idCD);
+        idCD.setBounds(0, 0, 0, 0);
+
+        jBP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lupa.png"))); // NOI18N
+        jBP.setBorderPainted(false);
+        jBP.setContentAreaFilled(false);
+        jBP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBPActionPerformed(evt);
+            }
+        });
+        jDesktopPane1.add(jBP);
+        jBP.setBounds(290, 240, 66, 40);
+
+        jTFTP.setEditable(false);
+        jTFTP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jDesktopPane1.add(jTFTP);
+        jTFTP.setBounds(390, 250, 120, 19);
+
+        jTPasaje.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTPasaje.setText("Pasaje:");
+        jDesktopPane1.add(jTPasaje);
+        jTPasaje.setBounds(240, 250, 100, 17);
+
+        jTFIP.setEditable(false);
+        jTFIP.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTFIP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jDesktopPane1.add(jTFIP);
+        jTFIP.setBounds(620, 250, 90, 19);
+
+        jTImPasaje.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTImPasaje.setText("Importe: $");
+        jDesktopPane1.add(jTImPasaje);
+        jTImPasaje.setBounds(550, 250, 100, 17);
+
+        jTFCantidadPasajeros.setEditable(false);
+        jTFCantidadPasajeros.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTFCantidadPasajeros.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTFCantidadPasajeros.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFCantidadPasajerosKeyTyped(evt);
+            }
+        });
+        jDesktopPane1.add(jTFCantidadPasajeros);
+        jTFCantidadPasajeros.setBounds(460, 430, 70, 19);
+
+        jLCantidadPasajeros.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLCantidadPasajeros.setText("Elija la cantidad de pasajeros:");
+        jDesktopPane1.add(jLCantidadPasajeros);
+        jLCantidadPasajeros.setBounds(240, 430, 240, 17);
+
+        jTFAl2.setEditable(false);
+        jTFAl2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jDesktopPane1.add(jTFAl2);
+        jTFAl2.setBounds(350, 330, 190, 19);
+
+        jTAl2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTAl2.setText("Tipo Servicio:");
+        jDesktopPane1.add(jTAl2);
+        jTAl2.setBounds(240, 330, 120, 17);
+
+        jTFAl1.setEditable(false);
+        jTFAl1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jDesktopPane1.add(jTFAl1);
+        jTFAl1.setBounds(580, 290, 130, 19);
+
+        jTAl1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTAl1.setText("Tipo Alojamiento:");
+        jDesktopPane1.add(jTAl1);
+        jTAl1.setBounds(450, 290, 160, 17);
+
+        jTAl3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTAl3.setText("Importe: $");
+        jDesktopPane1.add(jTAl3);
+        jTAl3.setBounds(550, 330, 100, 17);
+
+        jTFAl3.setEditable(false);
+        jTFAl3.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTFAl3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jDesktopPane1.add(jTFAl3);
+        jTFAl3.setBounds(620, 330, 90, 19);
+
+        jTPasaje2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTPasaje2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jTPasaje2.setText("$");
+        jDesktopPane1.add(jTPasaje2);
+        jTPasaje2.setBounds(530, 500, 30, 17);
+
+        jTCheckIN.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTCheckIN.setText("Seleccionar fecha de CheckIn:");
+        jDesktopPane1.add(jTCheckIN);
+        jTCheckIN.setBounds(240, 370, 230, 17);
+
+        checkOUT.setEnabled(false);
+        jDesktopPane1.add(checkOUT);
+        checkOUT.setBounds(480, 400, 150, 19);
+
+        checkIN.setEnabled(false);
+        jDesktopPane1.add(checkIN);
+        checkIN.setBounds(480, 370, 150, 19);
+
+        jLAclaracion1.setForeground(new java.awt.Color(204, 0, 0));
+        jLAclaracion1.setText("Precio por día.");
+        jDesktopPane1.add(jLAclaracion1);
+        jLAclaracion1.setBounds(640, 350, 90, 15);
+
+        temporada1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        temporada1.setForeground(new java.awt.Color(0, 102, 0));
+        temporada1.setText("Temporada ALTA");
+        jDesktopPane1.add(temporada1);
+        temporada1.setBounds(550, 420, 160, 22);
+
+        jTPasaje4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTPasaje4.setText("Pasajes");
+        jDesktopPane1.add(jTPasaje4);
+        jTPasaje4.setBounds(350, 520, 120, 17);
+
+        jTPasaje5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTPasaje5.setMaximumSize(new java.awt.Dimension(29, 17));
+        jTPasaje5.setMinimumSize(new java.awt.Dimension(29, 17));
+        jTPasaje5.setPreferredSize(new java.awt.Dimension(29, 17));
+        jDesktopPane1.add(jTPasaje5);
+        jTPasaje5.setBounds(470, 500, 29, 17);
+
+        jTPasaje6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTPasaje6.setText("días");
+        jDesktopPane1.add(jTPasaje6);
+        jTPasaje6.setBounds(490, 500, 40, 17);
+
+        jTPasaje7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTPasaje7.setText("Alojamiento por");
+        jDesktopPane1.add(jTPasaje7);
+        jTPasaje7.setBounds(350, 500, 120, 17);
+
+        jTPasaje8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTPasaje8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jTPasaje8.setText("$");
+        jDesktopPane1.add(jTPasaje8);
+        jTPasaje8.setBounds(530, 520, 30, 17);
+
+        precioPasajeT.setEditable(false);
+        precioPasajeT.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        precioPasajeT.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jDesktopPane1.add(precioPasajeT);
+        precioPasajeT.setBounds(560, 520, 90, 19);
+
+        jTPasaje9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTPasaje9.setText("Total");
+        jDesktopPane1.add(jTPasaje9);
+        jTPasaje9.setBounds(350, 540, 120, 17);
+
+        jTPasaje10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTPasaje10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jTPasaje10.setText("$");
+        jDesktopPane1.add(jTPasaje10);
+        jTPasaje10.setBounds(530, 540, 30, 17);
+
+        precioTotal.setEditable(false);
+        precioTotal.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        precioTotal.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jDesktopPane1.add(precioTotal);
+        precioTotal.setBounds(560, 540, 90, 19);
+
+        jBotonCalcular.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jBotonCalcular.setText("Calcular");
+        jBotonCalcular.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBotonCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBotonCalcularActionPerformed(evt);
+            }
+        });
+        jDesktopPane1.add(jBotonCalcular);
+        jBotonCalcular.setBounds(670, 380, 90, 25);
+
+        jBotonConfirmar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jBotonConfirmar.setText("Confirmar");
+        jBotonConfirmar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBotonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBotonConfirmarActionPerformed(evt);
+            }
+        });
+        jDesktopPane1.add(jBotonConfirmar);
+        jBotonConfirmar.setBounds(670, 500, 100, 25);
+
+        jTPasaje1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jTPasaje1.setText("Precio total Presupuesto por persona");
+        jDesktopPane1.add(jTPasaje1);
+        jTPasaje1.setBounds(330, 470, 370, 22);
+
+        temporada2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        temporada2.setForeground(new java.awt.Color(0, 0, 204));
+        temporada2.setText("Temporada MEDIA");
+        jDesktopPane1.add(temporada2);
+        temporada2.setBounds(550, 420, 180, 17);
+
+        temporada3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        temporada3.setForeground(new java.awt.Color(153, 153, 153));
+        temporada3.setText("Temporada BAJA");
+        jDesktopPane1.add(temporada3);
+        temporada3.setBounds(550, 420, 160, 22);
+
+        jTCheckOUT1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTCheckOUT1.setText("Seleccionar fecha de CheckOut:");
+        jDesktopPane1.add(jTCheckOUT1);
+        jTCheckOUT1.setBounds(240, 400, 240, 17);
+
+        precioAlojT.setEditable(false);
+        precioAlojT.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        precioAlojT.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jDesktopPane1.add(precioAlojT);
+        precioAlojT.setBounds(560, 500, 90, 19);
+
+        jBotonLimpiar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jBotonLimpiar.setText("Limpiar");
+        jBotonLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBotonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBotonLimpiarActionPerformed(evt);
+            }
+        });
+        jDesktopPane1.add(jBotonLimpiar);
+        jBotonLimpiar.setBounds(670, 530, 100, 25);
+
+        getContentPane().add(jDesktopPane1);
+        jDesktopPane1.setBounds(0, 0, 800, 670);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jDateFechaIngresoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateFechaIngresoPropertyChange
-        try{
-            LocalDate fechaI = jDateFechaIngreso.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            //LocalDate fechaE = jDateFechaEgreso.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            int mes;
-            mes = fechaI.getMonthValue();
-            if (mes == 01 || mes == 07) {
-                jLTemporada.setText("Temporada Alta");
-                //  JTTemporada.="temporada ALta;";
-            } else if (mes == 02 || mes == 06) {
-                jLTemporada.setText("Temporada Media");
-            } else {
-                jLTemporada.setText("Temporada Baja");
-            }
-        }catch(NullPointerException ex){
-            if (jDateFechaIngreso.getDate()==null){
-                JOptionPane.showMessageDialog(this,"Debe ingresar la fecha de Ingreso");}
-        }  // TODO add your handling code here:
-    }//GEN-LAST:event_jDateFechaIngresoPropertyChange
+    private void closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_closeActionPerformed
 
-    private void jComboCiudadDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboCiudadDestinoActionPerformed
+    private void jBAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAActionPerformed
+        jDesktopPane1.repaint();
+        popupPresupuestosA popupPresupuestosA = new popupPresupuestosA();
+        popupPresupuestosA.setVisible(true);
+        jDesktopPane1.add(popupPresupuestosA);
+        jDesktopPane1.moveToFront(popupPresupuestosA);
+    }//GEN-LAST:event_jBAActionPerformed
 
-        Ciudad ciudadSelec=(Ciudad) jComboCiudadDestino.getSelectedItem();
+    private void jBCOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCOActionPerformed
+        jDesktopPane1.repaint();
+        popupPresupuestosCO popupPresupuestosCO = new popupPresupuestosCO();
+        popupPresupuestosCO.setVisible(true);
+        jDesktopPane1.add(popupPresupuestosCO);
+        jDesktopPane1.moveToFront(popupPresupuestosCO);
+    }//GEN-LAST:event_jBCOActionPerformed
 
-        List<Alojamiento> aloj = alojamientoData.seleccionarAlojamiento( ciudadSelec.getProvincia());
-        for (Alojamiento alojamientos : aloj) {
-            //cargar el combo de alojamientos
-            jComboAlojamiento.addItem(new Alojamiento(alojamientos.getIdAlojamiento(),alojamiento.getTipoAlojamiento(),alojamiento.getFechaIn(),alojamiento.getFechaOut(),true,alojamiento.getTipoServicio(),alojamiento.getImporteDiario(),alojamiento.getCiudadDest()));
+    private void jBCDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCDActionPerformed
+        jDesktopPane1.repaint();
+        popupPresupuestosCD popupPresupuestosCD = new popupPresupuestosCD();
+        popupPresupuestosCD.setVisible(true);
+        jDesktopPane1.add(popupPresupuestosCD);
+        jDesktopPane1.moveToFront(popupPresupuestosCD);
+    }//GEN-LAST:event_jBCDActionPerformed
+
+    private void jBPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPActionPerformed
+        jDesktopPane1.repaint();
+        popupPresupuestosP popupPresupuestosP = new popupPresupuestosP();
+        popupPresupuestosP.setVisible(true);
+        jDesktopPane1.add(popupPresupuestosP);
+        jDesktopPane1.moveToFront(popupPresupuestosP);
+    }//GEN-LAST:event_jBPActionPerformed
+
+    private void jBotonCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonCalcularActionPerformed
+        try {
+            temporada1.setVisible(false);
+            temporada2.setVisible(false);
+            temporada3.setVisible(false);
+            long difference_In_Time = checkOUT.getDate().getTime() - checkIN.getDate().getTime();
+            long difference_In_Days = (difference_In_Time / (1000 * 60 * 60 * 24)) % 365;
+            jTPasaje5.setText(difference_In_Days + "");
+            precioAlojT.setText(difference_In_Days * Double.parseDouble(jTFAl3.getText()) + "");
+            precioPasajeT.setText(jTFIP.getText());
+            Double total = Double.parseDouble(precioAlojT.getText()) + Double.parseDouble(precioPasajeT.getText());
+            total = calcularTemporada(total, checkIN.getDate());
+            precioTotal.setText(total * Integer.parseInt(jTFCantidadPasajeros.getText()) + "");
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos para calcular");
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar la cantidad de pasajeros para continuar");
+            precioAlojT.setText("");
+            precioPasajeT.setText("");
+            temporada1.setVisible(false);
+            temporada2.setVisible(false);
+            temporada3.setVisible(false);
         }
-    }//GEN-LAST:event_jComboCiudadDestinoActionPerformed
+    }//GEN-LAST:event_jBotonCalcularActionPerformed
 
-    private void jBotonPresupuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonPresupuestoActionPerformed
-        try{
-            //calcular dias
-            java.util.Date fecha1 = jDateFechaIngreso.getDate();
-            java.util.Date fecha2 = jDateFechaEgreso.getDate();
-            java.util.Calendar calendar1 = java.util.Calendar.getInstance();
-            calendar1.setTime(fecha1);
-            java.util.Calendar calendar2 = java.util.Calendar.getInstance();
-            calendar2.setTime(fecha2);
-            long diferencia = calendar2.getTimeInMillis() - calendar1.getTimeInMillis();
-            int dias = (int) (diferencia / (1000 * 60 * 60 * 24));
-            JOptionPane.showMessageDialog(this, dias);
-            modeloTabla.setValueAt(jDateFechaIngreso, 0, 0);
-            modeloTabla.setValueAt(jDateFechaEgreso, 0, 1);
-            modeloTabla.setValueAt(jLTemporada, 0, 2);
-            modeloTabla.setValueAt(jComboCiudadOrigen.getSelectedItem(), 0, 3);
-            modeloTabla.setValueAt(jComboCiudadDestino.getSelectedItem(), 0, 4);
-            modeloTabla.setValueAt(jComboTipoTransporte.getSelectedItem(), 0, 5);
-            modeloTabla.setValueAt(jComboTipoAlojamiento.getSelectedItem(), 0, 6);
-            modeloTabla.setValueAt(jSCantPasajeros, 0, 7);
-            int cantPasajero = (Integer) jSCantPasajeros.getValue();
-            // Alojamiento alojamiento=jComboAlojamiento.getSelectedItem();
-            double importeDiario = 15000;//alojamiento.getImporteDiario();
-            Pasaje pasaje = new Pasaje();
-            Double importeTransporte = pasaje.getImporte();
-            double imporPresup = importeDiario + importeTransporte * dias * cantPasajero;
-            modeloTabla.setValueAt(imporPresup, 0, 7);
+    private void jBotonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonConfirmarActionPerformed
+        Paquete_Data p1 = new Paquete_Data();
+        Paquete p2 = new Paquete();
+        p2.setOrigen(ciudadOrigenPaquete);
+        p2.setDestino(ciudadDestinoPaquete);
+        p2.setPasaje(pasajePaquete);
+        alojamientoPaquete.setFechaIn(checkIN.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        alojamientoPaquete.setFechaOut(checkOUT.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        Alojamiento_Data guardarAlojamientoPaquete = new Alojamiento_Data();
+        guardarAlojamientoPaquete.guardarAlojamiento(alojamientoPaquete);
+        p2.setAlojamiento(alojamientoPaquete);
+        p2.isEstado(true);
+        p1.guardarPaquete(p2);
+    }//GEN-LAST:event_jBotonConfirmarActionPerformed
 
-        }catch(NullPointerException ex){
-            if (jDateFechaIngreso.getDate()==null){
-                JOptionPane.showMessageDialog(this,"Debe ingresar la fecha de Ingreso");}
+    private void jTFCantidadPasajerosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFCantidadPasajerosKeyTyped
+        char caracter = evt.getKeyChar();
+        if ((caracter < '0' || caracter > '9') && (caracter != KeyEvent.VK_BACKSPACE)) {
+            evt.consume();
         }
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBotonPresupuestoActionPerformed
+    }//GEN-LAST:event_jTFCantidadPasajerosKeyTyped
+
+    private void jBotonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonLimpiarActionPerformed
+        bloquearCampos();
+        limpiarCampos();
+        precioAlojT.setText("");
+        precioPasajeT.setText("");
+        precioTotal.setText("");
+        jTFCO.setText("");
+        checkIN.setCalendar(null);
+        checkOUT.setCalendar(null);
+        
+    }//GEN-LAST:event_jBotonLimpiarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBotonModificar;
-    private javax.swing.JButton jBotonPresupuesto;
-    private javax.swing.JComboBox<Alojamiento> jComboAlojamiento;
-    private javax.swing.JComboBox<Ciudad> jComboCiudadDestino;
-    private javax.swing.JComboBox<Ciudad> jComboCiudadOrigen;
-    private javax.swing.JComboBox<TipoAloj> jComboTipoAlojamiento;
-    private javax.swing.JComboBox<TipoTransporte> jComboTipoTransporte;
-    private com.toedter.calendar.JDateChooser jDateFechaEgreso;
-    private com.toedter.calendar.JDateChooser jDateFechaIngreso;
-    private javax.swing.JLabel jLAlojamiento;
-    private javax.swing.JLabel jLCantPasajeros;
-    private javax.swing.JLabel jLCiudadOrigen;
-    private javax.swing.JLabel jLCiudadOrigen1;
-    private javax.swing.JLabel jLFechaIngreso;
-    private javax.swing.JLabel jLFechaIngreso1;
-    private javax.swing.JLabel jLTemporada;
-    private javax.swing.JLabel jLTipoTransporte;
-    private javax.swing.JLabel jLTipoTransporte1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JSpinner jSCantPasajeros;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTablaPresupuesto;
+    public static com.toedter.calendar.JDateChooser checkIN;
+    public static com.toedter.calendar.JDateChooser checkOUT;
+    private javax.swing.JButton close;
+    public static javax.swing.JLabel idCD;
+    public static javax.swing.JLabel idCO;
+    public static javax.swing.JButton jBA;
+    public static javax.swing.JButton jBCD;
+    private javax.swing.JButton jBCO;
+    public static javax.swing.JButton jBP;
+    private javax.swing.JButton jBotonCalcular;
+    private javax.swing.JButton jBotonConfirmar;
+    private javax.swing.JButton jBotonLimpiar;
+    private javax.swing.JDesktopPane jDesktopPane1;
+    public static javax.swing.JLabel jLAclaracion1;
+    private javax.swing.JLabel jLCantidadPasajeros;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jTAl1;
+    private javax.swing.JLabel jTAl2;
+    private javax.swing.JLabel jTAl3;
+    private javax.swing.JLabel jTAlojamiento;
+    private javax.swing.JLabel jTCheckIN;
+    private javax.swing.JLabel jTCheckOUT1;
+    private javax.swing.JLabel jTCiudadD;
+    private javax.swing.JLabel jTCiudadO;
+    public static javax.swing.JTextField jTFAl1;
+    public static javax.swing.JTextField jTFAl2;
+    public static javax.swing.JTextField jTFAl3;
+    public static javax.swing.JTextField jTFCD;
+    public static javax.swing.JTextField jTFCO;
+    public static javax.swing.JTextField jTFCantidadPasajeros;
+    public static javax.swing.JTextField jTFIP;
+    public static javax.swing.JTextField jTFTP;
+    private javax.swing.JLabel jTImPasaje;
+    private javax.swing.JLabel jTPasaje;
+    private javax.swing.JLabel jTPasaje1;
+    private javax.swing.JLabel jTPasaje10;
+    private javax.swing.JLabel jTPasaje2;
+    private javax.swing.JLabel jTPasaje4;
+    private javax.swing.JLabel jTPasaje5;
+    private javax.swing.JLabel jTPasaje6;
+    private javax.swing.JLabel jTPasaje7;
+    private javax.swing.JLabel jTPasaje8;
+    private javax.swing.JLabel jTPasaje9;
+    private javax.swing.JPanel panelLateral1Ciudad;
+    private javax.swing.JPanel panelLateral2Ciudad;
+    public static javax.swing.JTextField precioAlojT;
+    public static javax.swing.JTextField precioPasajeT;
+    public static javax.swing.JTextField precioTotal;
+    public static javax.swing.JLabel temporada1;
+    public static javax.swing.JLabel temporada2;
+    public static javax.swing.JLabel temporada3;
     // End of variables declaration//GEN-END:variables
 
- private void cargarComboCiudad() {
-       List<Ciudad> listaCiudad = ciudadData.obtenerCiudades();
-       for (Ciudad ciudades : listaCiudad) {
-            jComboCiudadOrigen.addItem(new Ciudad(ciudades.getIdCiudad(), ciudades.getNombre(), ciudades.getProvincia(), ciudades.getPais(), ciudades.isEstado()));
-            jComboCiudadDestino.addItem(new Ciudad(ciudades.getIdCiudad(), ciudades.getNombre(), ciudades.getProvincia(), ciudades.getPais(), ciudades.isEstado()));
+    public static void bloquearCampos() {
+        jBA.setEnabled(false);
+        jBCD.setEnabled(false);
+        jBP.setEnabled(false);
+        jLAclaracion1.setVisible(false);
+        checkIN.setEnabled(false);
+        checkOUT.setEnabled(false);
+        jTFCantidadPasajeros.setEnabled(false);
+        jTFCantidadPasajeros.setEditable(false);
+    }
+
+    public static void limpiarCampos() {
+        //jTFCO.setText("");
+        jTFCD.setText("");
+        jTFTP.setText("");
+        jTFIP.setText("");
+        jTFAl1.setText("");
+        jTFAl2.setText("");
+        jTFAl3.setText("");
+        checkIN.cleanup();
+        checkOUT.cleanup();
+        temporada1.setVisible(false);
+        temporada2.setVisible(false);
+        temporada3.setVisible(false);
+        jTFCantidadPasajeros.setText("");
+    }
+
+    private Double calcularTemporada(Double total, Date inicio) {
+        switch (inicio.getMonth()) {
+            case 0:
+                total = total * 1.3;
+                temporada1.setVisible(true);
+                return total;
+            case 1:
+                total = total * 1.15;
+                temporada2.setVisible(true);
+                return total;
+            case 5:
+                total = total * 1.3;
+                temporada1.setVisible(true);
+                return total;
+            case 6:
+                total = total * 1.15;
+                temporada2.setVisible(true);
+                return total;
+            default:
+                temporada3.setVisible(true);
+                return total;
         }
     }
- 
- /*private void cargarComboAlojamiento(Ciudad ciudadDestino){
- List<Alojamiento> listaAlojamiento=alojamientoData.seleccionarAlojamiento(ciudadDestino);
- for(Alojamiento alojamientos:listaAlojamiento){
-     jComboAlojamiento.addItem(new Alojamiento(alojamientos.getIdAlojamiento(),alojamiento.getTipoAlojamiento(),alojamiento.getFechaIn(),alojamiento.getFechaOut(),true,alojamiento.getTipoServicio(),alojamiento.getImporteDiario(),alojamiento.getCiudadDest()));
- }       
- }*/
-
-    private void cargarComboTransporte() {
-        jComboTipoTransporte.addItem(TipoTransporte.ELIJA);
-        jComboTipoTransporte.addItem(TipoTransporte.AVION);
-        jComboTipoTransporte.addItem(TipoTransporte.COLECTIVO);
-        jComboTipoTransporte.addItem(TipoTransporte.TREN);
-        jComboTipoTransporte.addItem(TipoTransporte.TAXI);
-    }
-
-    private void cargarComboTipoAlojamiento() {
-        jComboTipoAlojamiento.addItem(TipoAloj.ELIJA);
-        jComboTipoAlojamiento.addItem(TipoAloj.HOTEL);
-        jComboTipoAlojamiento.addItem(TipoAloj.HOSTEL);
-        jComboTipoAlojamiento.addItem(TipoAloj.HOSTERIA);
-        jComboTipoAlojamiento.addItem(TipoAloj.DEPARTAMENTO);
-        jComboTipoAlojamiento.addItem(TipoAloj.CABAÑA);
-        jComboTipoAlojamiento.addItem(TipoAloj.BUNGALOWS);
-         }
-
-    private void armarCabeceraTabla() {
-        modeloTabla.addColumn("Fecha de Ingreso");
-        modeloTabla.addColumn("Fecha de Salida");
-        modeloTabla.addColumn("Temporada");
-        modeloTabla.addColumn("Ciudad Origen");
-        modeloTabla.addColumn("Ciudad Destino");
-        modeloTabla.addColumn("Tipo de Transporte");
-        modeloTabla.addColumn("Tipo de ALojamiento");
-        modeloTabla.addColumn("Cant. Pasajeros");
-        modeloTabla.addColumn("Importe $");
-
-        jTablaPresupuesto.setModel(modeloTabla);
-    }
-
 }

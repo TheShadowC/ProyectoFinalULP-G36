@@ -114,7 +114,8 @@ public class Pasaje_Data {
     public List<Pasaje> listarPasajes() {
         List<Pasaje> pasajes = new ArrayList<>();
         // Construir la consulta SQL utilizando de todos los pasajes activos
-        String sql = "SELECT * FROM pasajes WHERE  estado =1";
+//        String sql = "SELECT * FROM pasajes WHERE  estado =1 Order by idCiudadOrigen asc, idCiudadDestino asc";
+        String sql = "SELECT p.idPasaje, p.idCiudadOrigen, p.idCiudadDestino, p.tipoTransporte FROM pasajes p, ciudad co, ciudad cd WHERE p.estado =1 AND co.idCiudad = p.idCiudadOrigen and cd.idCiudad = p.idCiudadDestino Order by co.nombre asc, cd.nombre asc";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
@@ -127,6 +128,7 @@ public class Pasaje_Data {
                 Ciudad ciudadD = ciudadData.buscarCiudad(rs.getInt("idCiudadDestino"));
                 pasaje.setNombreCiudadO(ciudadO);
                 pasaje.setNombreCiudadD(ciudadD);
+                pasaje.setTipoTransporte(rs.getString("tipoTransporte"));
                 pasaje.setEstado(true);
                 pasajes.add(pasaje);
             }
@@ -166,6 +168,79 @@ public class Pasaje_Data {
 
         try {
             String sql = "UPDATE pasajes SET estado = 0 WHERE idPasaje = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            int fila = ps.executeUpdate();
+            if (fila == 1) {
+                JOptionPane.showMessageDialog(null, "Se elimino el pasaje.");
+
+            }
+            ps.close();
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Pasaje " + ex.getMessage());
+        }
+    }
+    
+    public List<Pasaje> listarPasajesCOCD(int idCO, int idCD){
+         List<Pasaje> pasajes = new ArrayList<>();
+        // Construir la consulta SQL utilizando de todos los pasajes activos
+        String sql = "SELECT p.idPasaje, p.tipoTransporte, p.importe FROM pasajes p, ciudad co, ciudad cd WHERE p.estado = 1 AND p.idCiudadOrigen = co.idCiudad AND p.idCiudadDestino = cd.idCiudad AND co.idCiudad = ? AND cd.idCiudad = ?;";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idCO);
+            stmt.setInt(2, idCD);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Pasaje pasaje = new Pasaje();
+                pasaje.setIdPasajero(rs.getInt("idPasaje"));
+                pasaje.setTipoTransporte(rs.getString("tipoTransporte"));
+                pasaje.setImporte(rs.getDouble("importe"));
+                pasaje.setEstado(true);
+                pasajes.add(pasaje);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al Acceder a la Tabla Pasaje " + ex.getMessage());
+        }
+        return pasajes;
+    }
+    
+    public List<Pasaje> listarPasajesInactivos() {
+        List<Pasaje> pasajes = new ArrayList<>();
+        // Construir la consulta SQL utilizando de todos los pasajes activos
+//        String sql = "SELECT * FROM pasajes WHERE  estado =1 Order by idCiudadOrigen asc, idCiudadDestino asc";
+        String sql = "SELECT p.idPasaje, p.idCiudadOrigen, p.idCiudadDestino, p.tipoTransporte FROM pasajes p, ciudad co, ciudad cd WHERE p.estado =0 AND co.idCiudad = p.idCiudadOrigen and cd.idCiudad = p.idCiudadDestino Order by co.nombre asc, cd.nombre asc";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Pasaje pasaje = new Pasaje();
+                Ciudad_Data ciudadData = new Ciudad_Data();
+                pasaje.setIdPasajero(rs.getInt("idPasaje"));
+                Ciudad ciudadO = ciudadData.buscarCiudad(rs.getInt("idCiudadOrigen"));
+                Ciudad ciudadD = ciudadData.buscarCiudad(rs.getInt("idCiudadDestino"));
+                pasaje.setNombreCiudadO(ciudadO);
+                pasaje.setNombreCiudadD(ciudadD);
+                pasaje.setTipoTransporte(rs.getString("tipoTransporte"));
+                pasaje.setEstado(true);
+                pasajes.add(pasaje);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al Acceder a la Tabla Pasaje " + ex.getMessage());
+        }
+        return pasajes;
+    }
+    
+        public void activarPasaje(int id) {
+
+        try {
+            String sql = "UPDATE pasajes SET estado = 1 WHERE idPasaje = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             int fila = ps.executeUpdate();

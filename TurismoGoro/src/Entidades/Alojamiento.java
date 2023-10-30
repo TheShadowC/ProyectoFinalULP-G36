@@ -18,6 +18,14 @@ public class Alojamiento {
     private double importeDiario;
     private Ciudad ciudadDest;
 
+    public Alojamiento(String tipoAlojamiento, String tipoServicio, double importeDiario, Ciudad ciudadDest, boolean estado) {
+        this.tipoAlojamiento = tipoAlojamiento;
+        this.tipoServicio = tipoServicio;
+        this.importeDiario = importeDiario;
+        this.ciudadDest = ciudadDest;
+        this.estado = estado;
+    }
+
     public Alojamiento() {
     }
 
@@ -41,6 +49,15 @@ public class Alojamiento {
         this.importeDiario = importeDiario;
         this.ciudadDest = ciudadDest;
     }
+
+    public Alojamiento(int idAlojamiento, String tipoAlojamiento, String tipoServicio, Ciudad ciudadDest, double importeDiario) {
+        this.idAlojamiento = idAlojamiento;
+        this.tipoAlojamiento = tipoAlojamiento;
+        this.tipoServicio = tipoServicio;
+        this.importeDiario = importeDiario;
+        
+    }
+    
     public int getIdAlojamiento() {
         return idAlojamiento;
     }
@@ -110,7 +127,8 @@ public class Alojamiento {
 
     @Override
     public String toString() {
-        String titulo= "Alojamiento: "+ "Id = " + idAlojamiento +"Tipo de Alojamiento = " + tipoAlojamiento + ", Ingreso= " + fechaIn + ", Salida= " + fechaOut +  ", Tipo de Servicio= " + tipoServicio + ", Importe Diario= " + importeDiario + ", Destino= " + ciudadDest ;
+//        String titulo= tipoAlojamiento.toUpperCase()+" - "+tipoServicio+" | "+ciudadDest.getNombre()+" $"+importeDiario;
+        String titulo="aca tiene que ir el string";
         return titulo;
     }
 

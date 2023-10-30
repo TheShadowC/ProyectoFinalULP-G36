@@ -100,7 +100,7 @@ public class Paquete_Data {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 paquete.setIdPaquete(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Paquete añadido con exito");
+                JOptionPane.showMessageDialog(null, "Se generó presupuesto para el paquete id "+paquete.getIdPaquete());
             }
             ps.close();
         } catch (SQLException ex) {

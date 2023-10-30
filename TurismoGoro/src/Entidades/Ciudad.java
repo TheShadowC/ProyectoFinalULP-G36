@@ -30,6 +30,15 @@ public class Ciudad {
         this.estado = estado;
     }
 
+    public Ciudad(int idCiudad, String nombre, String provincia, String pais) {
+        this.idCiudad = idCiudad;
+        this.nombre = nombre;
+        this.provincia = provincia;
+        this.pais = pais;
+    }
+    
+    
+
     public int getIdCiudad() {
         return idCiudad;
     }
@@ -70,10 +79,18 @@ public class Ciudad {
         this.estado = estado;
     }
 
+    public String toString(int i) {
+        String titulo;
+        switch (i){
+            case 1: titulo= pais.toUpperCase()+" - "+provincia+", "+nombre;
+            default:titulo=  "Ciudad: " + "id= " + idCiudad + ", Nombre= " + nombre + ", Provincia= " + provincia + ", Pais= " + pais;
+    }
+    return titulo;
+    }
+    
     @Override
     public String toString() {
-        String titulo= "Ciudad: " + "id= " + idCiudad + ", Nombre= " + nombre + ", Provincia= " + provincia + ", Pais= " + pais ;
-    
+        String titulo= pais.toUpperCase()+" - "+provincia+", "+nombre;
     return titulo;
     }
 

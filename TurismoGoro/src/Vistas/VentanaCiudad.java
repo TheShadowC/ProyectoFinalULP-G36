@@ -1,13 +1,9 @@
 package Vistas;
 
+import Popups.*;
 import AccesoADatos.*;
 import Entidades.*;
-import Vistas.*;
 import com.sun.glass.events.KeyEvent;
-import static java.awt.SystemColor.text;
-import java.sql.*;
-import java.time.*;
-import java.util.*;
 import java.util.regex.Pattern;
 import javax.swing.*;
 
@@ -66,6 +62,7 @@ public class VentanaCiudad extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         clearButton = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jPanel3.setBackground(new java.awt.Color(255, 204, 51));
 
@@ -296,6 +293,18 @@ public class VentanaCiudad extends javax.swing.JInternalFrame {
         jDesktopPane2.add(clearButton);
         clearButton.setBounds(680, 230, 90, 31);
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lupa.png"))); // NOI18N
+        jButton2.setBorderPainted(false);
+        jButton2.setContentAreaFilled(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jDesktopPane2.add(jButton2);
+        jButton2.setBounds(450, 210, 62, 40);
+
         getContentPane().add(jDesktopPane2);
         jDesktopPane2.setBounds(0, 0, 800, 600);
 
@@ -521,6 +530,14 @@ public class VentanaCiudad extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTPaisKeyTyped
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jDesktopPane2.repaint();
+        popupCiudadBuscar popupCiudadBuscar = new popupCiudadBuscar();
+        popupCiudadBuscar.setVisible(true);
+        jDesktopPane2.add(popupCiudadBuscar);
+        jDesktopPane2.moveToFront(popupCiudadBuscar);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clearButton;
@@ -531,6 +548,7 @@ public class VentanaCiudad extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBotonGuardar;
     private javax.swing.JButton jBotonModificar;
     private javax.swing.JButton jBotonNuevo;
+    private javax.swing.JButton jButton2;
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JLabel jLId;
     private javax.swing.JLabel jLNombre;
@@ -540,7 +558,7 @@ public class VentanaCiudad extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTId;
+    public static javax.swing.JTextField jTId;
     private javax.swing.JTextField jTNombre;
     private javax.swing.JTextField jTPais;
     private javax.swing.JTextField jTProvincia;

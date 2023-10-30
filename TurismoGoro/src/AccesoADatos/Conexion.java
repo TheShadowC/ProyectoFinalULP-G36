@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 
 public class Conexion {
 
+//    private static final String URL = "jdbc:mysql://192.168.1.82/";
     private static final String URL = "jdbc:mysql://localhost/";
     private static final String DB = "turismoAgencia";
     private static final String USUARIO = "root";

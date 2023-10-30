@@ -57,9 +57,9 @@ public class Alojamiento_Data {
         String sql = "SELECT DISTINCT c.* FROM ciudad c JOIN alojamiento a ON c.provincia = (SELECT provincia FROM ciudad WHERE idCiudad = a.idCiudad) WHERE c.provincia=?";
                
         try {
-            String provincia=ciudad.getProvincia();
+           // String provincia=ciudad.getProvincia();
             PreparedStatement stmt = conn.prepareStatement(sql);
-          // stmt.setString(1, provincia);
+            stmt.setString(1, nombreProvincia);
               ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -82,7 +82,35 @@ public class Alojamiento_Data {
         return alojamientos;
     }
     
-    
+    public List<Alojamiento> listarAlojamientos(){
+        List<Alojamiento> alojamientos = new ArrayList<>();
+        String sql = "SELECT * FROM alojamiento WHERE estado = 1";
+        
+        try{
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){
+                Alojamiento al = new Alojamiento();
+                al.setIdAlojamiento(rs.getInt("idAlojamiento"));
+                al.setTipoAlojamiento(rs.getString("tipoAlojamiento"));
+                al.setFechaIn(rs.getDate("fechaIn").toLocalDate());
+                al.setFechaOut(rs.getDate("fechaFin").toLocalDate());
+                al.setTipoServicio(rs.getString("servicio"));
+                al.setImporteDiario((Double) rs.getDouble("importeDiario"));
+                Ciudad_Data ciudad =new Ciudad_Data();
+                Ciudad city = new Ciudad();
+                city = ciudad.buscarCiudad(rs.getInt("idCiudad"));
+                al.setCiudadDest(city);
+                al.setEstado(true);
+                alojamientos.add(al);
+            }
+            rs.close();
+            stmt.close();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al Acceder a la Tabla Alojamientos: " + ex.getMessage());
+        }
+        return alojamientos;
+    }
     
  
     public void modificarAlojamiento(Alojamiento alojamiento) {
@@ -165,6 +193,37 @@ public class Alojamiento_Data {
 
         return alojamiento;
 
+    }
+    
+        public List<Alojamiento> listarAlojamientos2(String prov){
+        List<Alojamiento> alojamientos = new ArrayList<>();
+        String sql = "SELECT * FROM alojamiento a, ciudad c WHERE a.idCiudad = c.idCiudad AND c.provincia=? AND a.estado = 1";
+        
+        try{
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, prov);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){
+                Alojamiento al = new Alojamiento();
+                al.setIdAlojamiento(rs.getInt("idAlojamiento"));
+                al.setTipoAlojamiento(rs.getString("tipoAlojamiento"));
+                al.setFechaIn(rs.getDate("fechaIn").toLocalDate());
+                al.setFechaOut(rs.getDate("fechaFin").toLocalDate());
+                al.setTipoServicio(rs.getString("servicio"));
+                al.setImporteDiario((Double) rs.getDouble("importeDiario"));
+                Ciudad_Data ciudad =new Ciudad_Data();
+                Ciudad city = new Ciudad();
+                city = ciudad.buscarCiudad(rs.getInt("idCiudad"));
+                al.setCiudadDest(city);
+                al.setEstado(true);
+                alojamientos.add(al);
+            }
+            rs.close();
+            stmt.close();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al Acceder a la Tabla Alojamientos: " + ex.getMessage());
+        }
+        return alojamientos;
     }
     
      

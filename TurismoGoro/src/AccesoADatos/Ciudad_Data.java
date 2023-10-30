@@ -46,7 +46,7 @@ public class Ciudad_Data {
 
         try {
             // Obtener la lista de ciudades
-            String sql = "SELECT * FROM ciudad WHERE estado = 1;";
+            String sql = "SELECT * FROM ciudad WHERE estado = 1 Order by pais asc, provincia asc, nombre asc;";
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 
@@ -77,7 +77,7 @@ public class Ciudad_Data {
 
         try {
             // Obtener la lista de ciudades
-            String sql = "SELECT * FROM ciudad WHERE estado = 0;";
+            String sql = "SELECT * FROM ciudad WHERE estado = 0 Order by pais asc, provincia asc, nombre asc;";
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 
@@ -149,6 +149,35 @@ public class Ciudad_Data {
 
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el ciudad ");
+            }
+
+            stmt.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Ciudad " + ex.getMessage());
+
+        }
+
+        return ciudad;
+    }
+    
+    public Ciudad buscarCiudad3(int id) {
+        Ciudad ciudad = null;
+        String sql = "SELECT idCiudad, nombre, provincia, pais FROM ciudad WHERE idCiudad=? AND estado=1";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                ciudad = new Ciudad();
+                ciudad.setIdCiudad(rs.getInt("idCiudad"));
+                ciudad.setNombre(rs.getString("nombre"));
+                ciudad.setProvincia(rs.getString("provincia"));
+                ciudad.setPais(rs.getString("pais"));
+                ciudad.setEstado(true);
+
+            } else {
+                ciudad = null;
             }
 
             stmt.close();
@@ -251,6 +280,37 @@ public Ciudad buscarCiudad(int id) {
 
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de Ciudades inactivas. " + ex.getMessage());
         }
+    }
+    
+    public List<Ciudad> obtenerCiudadesD(int i) {
+        List<Ciudad> ciudades = new ArrayList<>();
+
+        try {
+            // Obtener la lista de ciudades
+            String sql = "SELECT c.idCiudad, c.nombre, c.provincia, c.pais, c.estado FROM pasajes p, ciudad c WHERE p.idCiudadOrigen=? AND p.idCiudadDestino = c.idCiudad AND c.estado = 1 AND p.estado = 1;";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, i);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Ciudad ciudad = new Ciudad();
+                ciudad.setIdCiudad(rs.getInt("idCiudad"));
+                ciudad.setNombre(rs.getString("nombre"));
+                ciudad.setProvincia(rs.getString("provincia"));
+                ciudad.setPais(rs.getString("pais"));
+                ciudad.setEstado(rs.getBoolean("estado"));
+
+                ciudades.add(ciudad);
+            }
+
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al Acceder a la Tabla Ciudad");
+        }
+
+        return ciudades;
     }
 
 }

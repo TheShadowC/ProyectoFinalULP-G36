@@ -1,4 +1,3 @@
-
 package Entidades;
 
 /**
@@ -6,12 +5,14 @@ package Entidades;
  * @author Susana
  */
 public class Paquete {
-     private int idPaquete;
-     private Ciudad origen;
-     private Ciudad destino;
-     private Alojamiento alojamiento;
-     private Pasaje pasaje;
-     private boolean estado;
+
+    private int idPaquete;
+    private Ciudad origen;
+    private Ciudad destino;
+    private Alojamiento alojamiento;
+    private Pasaje pasaje;
+    private boolean estado;
+
     public Paquete() {
     }
 
@@ -20,16 +21,16 @@ public class Paquete {
         this.destino = destino;
         this.alojamiento = alojamiento;
         this.pasaje = pasaje;
-        this.estado=estado;
+        this.estado = estado;
     }
 
-    public Paquete(int idPaquete, Ciudad origen, Ciudad destino, Alojamiento alojamiento, Pasaje pasaje,  boolean estado) {
+    public Paquete(int idPaquete, Ciudad origen, Ciudad destino, Alojamiento alojamiento, Pasaje pasaje, boolean estado) {
         this.idPaquete = idPaquete;
         this.origen = origen;
         this.destino = destino;
         this.alojamiento = alojamiento;
         this.pasaje = pasaje;
-        this.estado=estado;
+        this.estado = estado;
 
     }
 
@@ -72,19 +73,20 @@ public class Paquete {
     public void setPasaje(Pasaje pasaje) {
         this.pasaje = pasaje;
     }
-public boolean getEstado() {
+
+    public boolean getEstado() {
         return estado;
     }
 
     public void isEstado(boolean estado) {
         this.estado = estado;
     }
+
     @Override
     public String toString() {
-        String titulo="Paquete: " + "Id " + idPaquete + ", Origen= " + origen + ", Destino= " + destino + ", Alojamiento= " + alojamiento + ", Pasaje= " + pasaje ;
- ;
+        String titulo = "Paquete: " + "Id " + idPaquete + ", Origen= " + origen + ", Destino= " + destino + ", Alojamiento= " + alojamiento + ", Pasaje= " + pasaje;
+        ;
         return titulo;
     }
-     
-     
+
 }

@@ -1,5 +1,6 @@
 package Vistas;
 
+import Popups.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.regex.Pattern;
@@ -77,6 +78,9 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
         buscarPasajes = new javax.swing.JButton();
         buscarCiudad = new javax.swing.JButton();
         clearButton = new javax.swing.JButton();
+        jLidCO = new javax.swing.JLabel();
+        jLidCD = new javax.swing.JLabel();
+        jBotonActivar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(null);
@@ -144,7 +148,7 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
             }
         });
         jDesktopPane1.add(jBotonNuevo);
-        jBotonNuevo.setBounds(320, 520, 90, 31);
+        jBotonNuevo.setBounds(260, 530, 90, 31);
 
         jBotonGuardar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jBotonGuardar.setText("Guardar");
@@ -155,7 +159,7 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
             }
         });
         jDesktopPane1.add(jBotonGuardar);
-        jBotonGuardar.setBounds(420, 520, 100, 31);
+        jBotonGuardar.setBounds(360, 530, 100, 31);
 
         jBotonEliminar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jBotonEliminar.setText("Eliminar");
@@ -166,7 +170,7 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
             }
         });
         jDesktopPane1.add(jBotonEliminar);
-        jBotonEliminar.setBounds(650, 520, 100, 31);
+        jBotonEliminar.setBounds(590, 530, 100, 31);
 
         jBotonModificar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jBotonModificar.setText("Modificar");
@@ -177,12 +181,13 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
             }
         });
         jDesktopPane1.add(jBotonModificar);
-        jBotonModificar.setBounds(530, 520, 110, 31);
+        jBotonModificar.setBounds(470, 530, 110, 31);
 
+        jTCiudadDestino.setEditable(false);
         jTCiudadDestino.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTCiudadDestino.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jTCiudadDestino.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jDesktopPane1.add(jTCiudadDestino);
-        jTCiudadDestino.setBounds(450, 330, 203, 23);
+        jTCiudadDestino.setBounds(370, 330, 320, 23);
 
         jDesktopPane1.add(jComboTipoTrans);
         jComboTipoTrans.setBounds(450, 370, 200, 26);
@@ -190,17 +195,18 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
         jLCiudadD2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLCiudadD2.setText("Ciudad Origen: ");
         jDesktopPane1.add(jLCiudadD2);
-        jLCiudadD2.setBounds(310, 290, 109, 17);
+        jLCiudadD2.setBounds(250, 290, 109, 17);
 
+        jTCiudadOrigen.setEditable(false);
         jTCiudadOrigen.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTCiudadOrigen.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jTCiudadOrigen.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jDesktopPane1.add(jTCiudadOrigen);
-        jTCiudadOrigen.setBounds(450, 290, 203, 23);
+        jTCiudadOrigen.setBounds(370, 290, 320, 23);
 
         jLCiudadD3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLCiudadD3.setText("Ciudad Destino:");
         jDesktopPane1.add(jLCiudadD3);
-        jLCiudadD3.setBounds(310, 330, 111, 17);
+        jLCiudadD3.setBounds(250, 330, 111, 17);
 
         panelLateral1Ciudad.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -237,11 +243,11 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
         );
         panelLateral2CiudadLayout.setVerticalGroup(
             panelLateral2CiudadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 410, Short.MAX_VALUE)
+            .addGap(0, 440, Short.MAX_VALUE)
         );
 
         jDesktopPane1.add(panelLateral2Ciudad);
-        panelLateral2Ciudad.setBounds(0, 171, 229, 410);
+        panelLateral2Ciudad.setBounds(0, 171, 229, 440);
 
         jLabel1.setFont(new java.awt.Font("Broadway", 3, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -284,7 +290,7 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
             }
         });
         jDesktopPane1.add(buscarCiudad2);
-        buscarCiudad2.setBounds(660, 330, 30, 30);
+        buscarCiudad2.setBounds(700, 330, 30, 30);
 
         buscarPasajes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lupa.png"))); // NOI18N
         buscarPasajes.setBorderPainted(false);
@@ -308,7 +314,7 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
             }
         });
         jDesktopPane1.add(buscarCiudad);
-        buscarCiudad.setBounds(660, 290, 30, 30);
+        buscarCiudad.setBounds(700, 290, 30, 30);
 
         clearButton.setText("Limpiar");
         clearButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -320,8 +326,32 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
         jDesktopPane1.add(clearButton);
         clearButton.setBounds(680, 220, 90, 32);
 
+        jLidCO.setBackground(new java.awt.Color(255, 255, 255));
+        jLidCO.setForeground(new java.awt.Color(255, 255, 255));
+        jLidCO.setEnabled(false);
+        jDesktopPane1.add(jLidCO);
+        jLidCO.setBounds(260, 290, 0, 0);
+
+        jLidCD.setBackground(new java.awt.Color(255, 255, 255));
+        jLidCD.setForeground(new java.awt.Color(255, 255, 255));
+        jLidCD.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLidCD.setEnabled(false);
+        jDesktopPane1.add(jLidCD);
+        jLidCD.setBounds(260, 330, 0, 0);
+
+        jBotonActivar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jBotonActivar.setText("Activar");
+        jBotonActivar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBotonActivar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBotonActivarActionPerformed(evt);
+            }
+        });
+        jDesktopPane1.add(jBotonActivar);
+        jBotonActivar.setBounds(700, 530, 90, 31);
+
         getContentPane().add(jDesktopPane1);
-        jDesktopPane1.setBounds(0, 0, 800, 580);
+        jDesktopPane1.setBounds(0, 0, 800, 600);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -339,10 +369,10 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
                 Ciudad cO, cD;
                 cO = ciudadData.buscarCiudad(pasaje.getNombreCiudadO().getIdCiudad());
                 cD = ciudadData.buscarCiudad(pasaje.getNombreCiudadD().getIdCiudad());
-                jTIdCiudadOrigen.setText(pasaje.getNombreCiudadO().getIdCiudad() + "");
-                jTCiudadOrigen.setText(cO.getNombre());
-                jTIdCiudadDestino.setText(pasaje.getNombreCiudadD().getIdCiudad() + "");
-                jTCiudadDestino.setText(cD.getNombre());
+                jLidCO.setText(pasaje.getNombreCiudadO().getIdCiudad() + "");
+                jTCiudadOrigen.setText(cO.getPais().toUpperCase() + " - " + cO.getProvincia() + ", " + cO.getNombre());
+                jLidCD.setText(pasaje.getNombreCiudadD().getIdCiudad() + "");
+                jTCiudadDestino.setText(cD.getPais().toUpperCase() + " - " + cD.getProvincia() + ", " + cD.getNombre());
                 jTImporte.setText(pasaje.getImporte() + "");
                 jComboTipoTrans.getModel().setSelectedItem(pasaje.getTipoTransporte());
                 activarCampos();
@@ -363,8 +393,7 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
         limpiarCampos();
         pasaje = null;
         jTIdPasaje.setEnabled(false);
-        jTCiudadOrigen.setEnabled(true);
-        jTCiudadDestino.setEnabled(true);
+        buscarPasajes.setEnabled(false);
         jBotonNuevo.setEnabled(true);
         jBotonGuardar.setEnabled(true);
         jBotonEliminar.setEnabled(false);
@@ -376,15 +405,12 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
     private void jBotonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonGuardarActionPerformed
         Pasaje pasaje = null; //
         //pongo todos los valores del formulario en variables
-
         Integer idCO, idCD;
         Ciudad cO, cD;
-        idCO = Integer.parseInt(jTCiudadOrigen.getText());
+        idCO = Integer.parseInt(jLidCO.getText());
         cO = ciudadData.buscarCiudad(idCO);
-        jTCiudadOrigen.setText(cO.getNombre());
-        idCD = Integer.parseInt(jTCiudadDestino.getText());
+        idCD = Integer.parseInt(jLidCD.getText());
         cD = ciudadData.buscarCiudad(idCD);
-        jTCiudadDestino.setText(cD.getNombre());
         TipoTransporte tipoTrans = (TipoTransporte) jComboTipoTrans.getSelectedItem();
         String tipoT = tipoTrans.name();//parseo tipo tipoAlojamiento a String 
         Boolean estado = true;
@@ -393,28 +419,41 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
             pasaje = new Pasaje(tipoT, importe, cO, cD, estado);
             pasajeData.guardarPasaje(pasaje);
             jBotonNuevo.setSelected(false);
+            desactivarCampos();
+            limpiarCampos();
+            jTIdPasaje.setEnabled(true);
+            buscarPasajes.setEnabled(true);
+            jTIdPasaje.setText("");
         }
 
 
     }//GEN-LAST:event_jBotonGuardarActionPerformed
 
     private void jBotonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonEliminarActionPerformed
-        int id = Integer.parseInt(jTIdPasaje.getText());
-        String TipoTransporte = (String) jComboTipoTrans.getSelectedItem();
-        Double importe = Double.parseDouble(jTImporte.getText());
-        int idCiudadD = Integer.parseInt(jTIdCiudadDestino.getText());
-        Ciudad ciuD = ciudadData.buscarCiudad(idCiudadD);
-        int idCiudadO = Integer.parseInt(jTIdCiudadOrigen.getText());
-        Ciudad ciuO = ciudadData.buscarCiudad(idCiudadO);
-        if (pasaje == null) {
-            pasaje = new Pasaje(TipoTransporte, importe, ciuO, ciuD, false);
-            int respuesta = JOptionPane.showConfirmDialog(null, "Esta por borrar un Pasaje ¿Quieres continuar?", "Confirmación", JOptionPane.YES_NO_OPTION);
-            if (respuesta == JOptionPane.YES_OPTION) {
-                pasajeData.eliminarPasaje(id);;
-                limpiarCampos();
-                activarCampos();
-                jTIdPasaje.requestFocus();
-            }
+//        int id = Integer.parseInt(jTIdPasaje.getText());
+//        String TipoTransporte = (String) jComboTipoTrans.getSelectedItem();
+//        Double importe = Double.parseDouble(jTImporte.getText());
+//        int idCiudadD = Integer.parseInt(jLidCD.getText());
+//        Ciudad ciuD = ciudadData.buscarCiudad(idCiudadD);
+//        int idCiudadO = Integer.parseInt(jLidCO.getText());
+//        Ciudad ciuO = ciudadData.buscarCiudad(idCiudadO);
+//        if (pasaje == null) {
+//            pasaje = new Pasaje(TipoTransporte, importe, ciuO, ciuD, false);
+//            int respuesta = JOptionPane.showConfirmDialog(null, "Esta por borrar un Pasaje ¿Quieres continuar?", "Confirmación", JOptionPane.YES_NO_OPTION);
+//            if (respuesta == JOptionPane.YES_OPTION) {
+//                pasajeData.eliminarPasaje(id);;
+//                limpiarCampos();
+//                activarCampos();
+//                jTIdPasaje.requestFocus();
+//            }
+//        }
+        int respuesta = JOptionPane.showConfirmDialog(null, "Esta por borrar un Pasaje ¿Quieres continuar?", "Confirmación", JOptionPane.YES_NO_OPTION);
+        if (respuesta == JOptionPane.YES_OPTION) {
+            Pasaje_Data borrar = new Pasaje_Data();
+            borrar.eliminarPasaje(Integer.parseInt(jTIdPasaje.getText()));
+            limpiarCampos();
+            desactivarCampos();
+            jTIdPasaje.requestFocus();
         }
     }//GEN-LAST:event_jBotonEliminarActionPerformed
 
@@ -423,26 +462,28 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
         try {
             Integer id = Integer.parseInt(jTIdPasaje.getText());
             Integer idCO, idCD;
-            idCO = Integer.parseInt(jTIdCiudadOrigen.getText());
-            idCD = Integer.parseInt(jTIdCiudadDestino.getText());
-            TipoTransporte tTrans = (TipoTransporte) jComboTipoTrans.getSelectedItem();
-            String transporte = tTrans.name();
-            Boolean estado = true;
-            double importe = Double.parseDouble(jTImporte.getText());
-            Ciudad cO, cD;
-            cO = ciudadData.buscarCiudad(idCO);
-            jTCiudadOrigen.setText(cO.getNombre());
-            cD = ciudadData.buscarCiudad(idCD);
-            jTCiudadDestino.setText(cD.getNombre());
-            Pasaje pasaj = pasajeData.buscarPasaje(id);
-            if (id == pasaj.getIdPasajero()) {
-                pasaj.setIdPasajero(id);
-                pasaj.setEstado(estado);
-                pasaj.setImporte(importe);
-                pasaj.setTipoTransporte(transporte);
-                pasaj.setNombreCiudadO(cO);
-                pasaj.setNombreCiudadD(cD);
-                pasajeData.modificarPasaje(pasaj);
+            idCO = Integer.parseInt(jLidCO.getText());
+            idCD = Integer.parseInt(jLidCD.getText());
+//            TipoTransporte tTrans = (TipoTransporte) jComboTipoTrans.getSelectedItem();
+            if (jComboTipoTrans.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(null, "Rellene todas las celdas para continuar");
+            } else {
+                String transporte = jComboTipoTrans.getSelectedItem().toString();
+                Boolean estado = true;
+                double importe = Double.parseDouble(jTImporte.getText());
+                Ciudad cO, cD;
+                cO = ciudadData.buscarCiudad(idCO);
+                cD = ciudadData.buscarCiudad(idCD);
+                Pasaje pasaj = pasajeData.buscarPasaje(id);
+                if (id == pasaj.getIdPasajero()) {
+                    pasaj.setIdPasajero(id);
+                    pasaj.setEstado(estado);
+                    pasaj.setImporte(importe);
+                    pasaj.setTipoTransporte(transporte);
+                    pasaj.setNombreCiudadO(cO);
+                    pasaj.setNombreCiudadD(cD);
+                    pasajeData.modificarPasaje(pasaj);
+                }
             }
             jBotonNuevo.setEnabled(true);
         } catch (NumberFormatException ex) {
@@ -499,6 +540,16 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTImporteKeyTyped
 
+    private void jBotonActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonActivarActionPerformed
+        //        ciudadData.ActivarCiudad();
+        //        JOptionPane.showMessageDialog(this, "Todas las ciudades estan activas");
+        jDesktopPane1.repaint();
+        popupPasajesActivar popupPasajesActivar = new popupPasajesActivar();
+        popupPasajesActivar.setVisible(true);
+        jDesktopPane1.add(popupPasajesActivar);
+        jDesktopPane1.moveToFront(popupPasajesActivar);
+    }//GEN-LAST:event_jBotonActivarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buscarCiudad;
@@ -506,6 +557,7 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
     private javax.swing.JButton buscarPasajes;
     private javax.swing.JButton clearButton;
     private javax.swing.JButton closeCiudad;
+    private javax.swing.JButton jBotonActivar;
     private javax.swing.JButton jBotonBuscar;
     private javax.swing.JButton jBotonEliminar;
     private javax.swing.JButton jBotonGuardar;
@@ -520,6 +572,8 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLTipoTrans;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel7;
+    public static javax.swing.JLabel jLidCD;
+    public static javax.swing.JLabel jLidCO;
     public static javax.swing.JTextField jTCiudadDestino;
     public static javax.swing.JTextField jTCiudadOrigen;
     private javax.swing.JTextField jTIdCiudadDestino;
@@ -551,6 +605,9 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
         jTCiudadOrigen.setEnabled(false);
         jTIdCiudadDestino.setEnabled(false);
         jComboTipoTrans.setEnabled(false);
+        jBotonEliminar.setEnabled(false);
+        jBotonModificar.setEnabled(false);
+        jBotonGuardar.setEnabled(false);
     }
 
     public void activarCampos() {
@@ -561,11 +618,15 @@ public class VentanaPasaje extends javax.swing.JInternalFrame {
         jTCiudadOrigen.setEnabled(true);
         jTIdCiudadDestino.setEnabled(true);
         jComboTipoTrans.setEnabled(true);
+        jBotonEliminar.setEnabled(true);
+        jBotonModificar.setEnabled(true);
 
     }
 
     public void limpiarCampos() {
         jTIdPasaje.setText("");
+        jLidCO.setText("");
+        jLidCD.setText("");
         jTImporte.setText("");
         jComboTipoTrans.setSelectedIndex(0);
         jTCiudadDestino.setText("");

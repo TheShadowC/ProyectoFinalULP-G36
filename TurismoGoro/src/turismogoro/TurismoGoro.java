@@ -1,9 +1,6 @@
 package turismogoro;
 
-import AccesoADatos.*;
-import java.util.List;
-import Entidades.*;
-import Vistas.*;
+import Vistas.Menu_1;
 
 /**
  *
@@ -12,10 +9,11 @@ import Vistas.*;
 public class TurismoGoro {
 
     public static void main(String[] args) {
-        
+
 //        login run = new login();
         Menu_1 run = new Menu_1();
-        run.setVisible(true);     
+        run.setVisible(true);
+
     }
 
 }

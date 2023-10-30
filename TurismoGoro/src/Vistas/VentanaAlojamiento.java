@@ -1,24 +1,15 @@
 package Vistas;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.regex.Pattern;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+import Popups.*;
 import AccesoADatos.*;
 import Entidades.*;
+import com.sun.glass.events.KeyEvent;
 
 /**
  *
  * @author Susana
  */
 public class VentanaAlojamiento extends javax.swing.JInternalFrame {
-
-    private DefaultTableModel modelo = new DefaultTableModel();
-    private Alojamiento_Data alojamientoData = new Alojamiento_Data();
-    private Alojamiento alojamiento = null;
-    private Ciudad ciudad = new Ciudad();
-    private Ciudad_Data ciudadData = new Ciudad_Data();
 
     /**
      * Creates new form Alojamiento
@@ -28,10 +19,7 @@ public class VentanaAlojamiento extends javax.swing.JInternalFrame {
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null); //Elimina encabezado de ventana
         cargarComboTipoAlojamiento();
         cargarComboTipoServ();
-        limpiarCampos();
-        cabeceraTabla();
-        jBotonGuardar.setEnabled(false);
-        jBotonEliminar.setEnabled(false);
+        bloquearCampos();
     }
 
     /**
@@ -45,33 +33,32 @@ public class VentanaAlojamiento extends javax.swing.JInternalFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
         jLId = new javax.swing.JLabel();
         jTId = new javax.swing.JTextField();
-        jBotonBuscar = new javax.swing.JButton();
+        jBotonClean = new javax.swing.JButton();
         jTipoAloj = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLTipoServ = new javax.swing.JLabel();
         jLImporte = new javax.swing.JLabel();
-        jLCiudadDestino = new javax.swing.JLabel();
         jTImporteDiario = new javax.swing.JTextField();
-        jTIdCiudadDest = new javax.swing.JTextField();
         jBotonModificar = new javax.swing.JButton();
-        jBotonNuevo = new javax.swing.JButton();
         jBotonEliminar = new javax.swing.JButton();
-        jBotonGuardar = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTablaAlojamiento = new javax.swing.JTable();
         jComboTipoAloj = new javax.swing.JComboBox<>();
         jComboTipoServ = new javax.swing.JComboBox<>();
-        jDateFechaSalida = new com.toedter.calendar.JDateChooser();
-        jDateFechaIng = new com.toedter.calendar.JDateChooser();
         jLNombreCiudad = new javax.swing.JLabel();
         jTNombreCiudad = new javax.swing.JTextField();
         closeCiudad = new javax.swing.JButton();
         panelLateral1Ciudad = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         panelLateral2Ciudad = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jLTipoServ1 = new javax.swing.JLabel();
+        jBotonBuscar = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jBotonNuevo = new javax.swing.JButton();
+        jBotonGuardar = new javax.swing.JButton();
+        jBotonActivar = new javax.swing.JButton();
+        jLidCiudad = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -96,137 +83,96 @@ public class VentanaAlojamiento extends javax.swing.JInternalFrame {
 
         jLId.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLId.setText("Id Alojamiento");
-        getContentPane().add(jLId);
-        jLId.setBounds(300, 70, 99, 17);
+        jDesktopPane1.add(jLId);
+        jLId.setBounds(310, 240, 99, 17);
 
         jTId.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        getContentPane().add(jTId);
-        jTId.setBounds(460, 60, 72, 23);
-
-        jBotonBuscar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jBotonBuscar.setText("Buscar");
-        jBotonBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBotonBuscarActionPerformed(evt);
+        jTId.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTIdKeyTyped(evt);
             }
         });
-        getContentPane().add(jBotonBuscar);
-        jBotonBuscar.setBounds(710, 380, 79, 33);
+        jDesktopPane1.add(jTId);
+        jTId.setBounds(440, 240, 72, 23);
+
+        jBotonClean.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jBotonClean.setText("Limpiar");
+        jBotonClean.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBotonClean.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBotonCleanActionPerformed(evt);
+            }
+        });
+        jDesktopPane1.add(jBotonClean);
+        jBotonClean.setBounds(670, 230, 100, 33);
 
         jTipoAloj.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTipoAloj.setText("Tipo Alojamiento");
-        getContentPane().add(jTipoAloj);
-        jTipoAloj.setBounds(300, 110, 116, 17);
-
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel3.setText("Fecha Ingreso");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(300, 190, 101, 17);
-
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel4.setText("Fecha Salida");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(300, 220, 89, 17);
-
-        jLTipoServ.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLTipoServ.setText("Tipo Servicio");
-        getContentPane().add(jLTipoServ);
-        jLTipoServ.setBounds(300, 150, 92, 17);
+        jDesktopPane1.add(jTipoAloj);
+        jTipoAloj.setBounds(310, 310, 116, 17);
 
         jLImporte.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLImporte.setText("Importe Diario: $");
-        getContentPane().add(jLImporte);
-        jLImporte.setBounds(300, 260, 115, 17);
-
-        jLCiudadDestino.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLCiudadDestino.setText("Id Ciudad Destino");
-        getContentPane().add(jLCiudadDestino);
-        jLCiudadDestino.setBounds(260, 290, 124, 17);
+        jLImporte.setText("Importe Diario:   $");
+        jDesktopPane1.add(jLImporte);
+        jLImporte.setBounds(310, 390, 130, 17);
 
         jTImporteDiario.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        getContentPane().add(jTImporteDiario);
-        jTImporteDiario.setBounds(470, 250, 132, 23);
-
-        jTIdCiudadDest.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        getContentPane().add(jTIdCiudadDest);
-        jTIdCiudadDest.setBounds(430, 290, 76, 23);
+        jTImporteDiario.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jDesktopPane1.add(jTImporteDiario);
+        jTImporteDiario.setBounds(440, 390, 132, 23);
 
         jBotonModificar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jBotonModificar.setText("Modificar");
+        jBotonModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBotonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBotonModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBotonModificar);
-        jBotonModificar.setBounds(460, 510, 96, 33);
-
-        jBotonNuevo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jBotonNuevo.setText("Nuevo");
-        jBotonNuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBotonNuevoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jBotonNuevo);
-        jBotonNuevo.setBounds(260, 510, 76, 33);
+        jDesktopPane1.add(jBotonModificar);
+        jBotonModificar.setBounds(520, 510, 110, 33);
 
         jBotonEliminar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jBotonEliminar.setText("Eliminar");
+        jBotonEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBotonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBotonEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBotonEliminar);
-        jBotonEliminar.setBounds(610, 510, 86, 33);
-
-        jBotonGuardar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jBotonGuardar.setText("Guardar");
-        jBotonGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBotonGuardarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jBotonGuardar);
-        jBotonGuardar.setBounds(360, 510, 87, 33);
-
-        jScrollPane2.setViewportView(jTablaAlojamiento);
-
-        getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(237, 326, 480, 145);
+        jDesktopPane1.add(jBotonEliminar);
+        jBotonEliminar.setBounds(630, 510, 110, 33);
 
         jComboTipoAloj.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        getContentPane().add(jComboTipoAloj);
-        jComboTipoAloj.setBounds(460, 100, 147, 27);
+        jDesktopPane1.add(jComboTipoAloj);
+        jComboTipoAloj.setBounds(440, 310, 147, 20);
 
         jComboTipoServ.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        getContentPane().add(jComboTipoServ);
-        jComboTipoServ.setBounds(430, 140, 176, 27);
-        getContentPane().add(jDateFechaSalida);
-        jDateFechaSalida.setBounds(420, 220, 164, 29);
-        getContentPane().add(jDateFechaIng);
-        jDateFechaIng.setBounds(470, 180, 164, 29);
+        jDesktopPane1.add(jComboTipoServ);
+        jComboTipoServ.setBounds(440, 350, 176, 20);
 
         jLNombreCiudad.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLNombreCiudad.setText("Nombre Ciudad: ");
-        getContentPane().add(jLNombreCiudad);
-        jLNombreCiudad.setBounds(510, 280, 116, 17);
+        jDesktopPane1.add(jLNombreCiudad);
+        jLNombreCiudad.setBounds(310, 280, 116, 17);
 
         jTNombreCiudad.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        getContentPane().add(jTNombreCiudad);
-        jTNombreCiudad.setBounds(640, 280, 132, 23);
+        jDesktopPane1.add(jTNombreCiudad);
+        jTNombreCiudad.setBounds(440, 280, 132, 23);
 
         closeCiudad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/flechaAtras.png"))); // NOI18N
         closeCiudad.setText("Atrás");
         closeCiudad.setAlignmentY(0.0F);
         closeCiudad.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        closeCiudad.setBorderPainted(false);
+        closeCiudad.setContentAreaFilled(false);
+        closeCiudad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         closeCiudad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 closeCiudadActionPerformed(evt);
             }
         });
-        getContentPane().add(closeCiudad);
+        jDesktopPane1.add(closeCiudad);
         closeCiudad.setBounds(670, 20, 90, 38);
 
         panelLateral1Ciudad.setBackground(new java.awt.Color(255, 255, 255));
@@ -245,7 +191,7 @@ public class VentanaAlojamiento extends javax.swing.JInternalFrame {
             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
         );
 
-        getContentPane().add(panelLateral1Ciudad);
+        jDesktopPane1.add(panelLateral1Ciudad);
         panelLateral1Ciudad.setBounds(0, 0, 229, 171);
 
         panelLateral2Ciudad.setBackground(new java.awt.Color(255, 204, 51));
@@ -258,182 +204,221 @@ public class VentanaAlojamiento extends javax.swing.JInternalFrame {
         );
         panelLateral2CiudadLayout.setVerticalGroup(
             panelLateral2CiudadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 410, Short.MAX_VALUE)
+            .addGap(0, 450, Short.MAX_VALUE)
         );
 
-        getContentPane().add(panelLateral2Ciudad);
-        panelLateral2Ciudad.setBounds(0, 171, 229, 410);
+        jDesktopPane1.add(panelLateral2Ciudad);
+        panelLateral2Ciudad.setBounds(0, 171, 229, 450);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lupa.png"))); // NOI18N
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jDesktopPane1.add(jButton1);
+        jButton1.setBounds(510, 230, 62, 40);
+
+        jLTipoServ1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLTipoServ1.setText("Tipo Servicio");
+        jDesktopPane1.add(jLTipoServ1);
+        jLTipoServ1.setBounds(310, 350, 92, 17);
+
+        jBotonBuscar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jBotonBuscar.setText("Buscar");
+        jBotonBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBotonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBotonBuscarActionPerformed(evt);
+            }
+        });
+        jDesktopPane1.add(jBotonBuscar);
+        jBotonBuscar.setBounds(670, 190, 100, 33);
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lupa.png"))); // NOI18N
+        jButton2.setBorderPainted(false);
+        jButton2.setContentAreaFilled(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jDesktopPane1.add(jButton2);
+        jButton2.setBounds(570, 270, 62, 40);
+
+        jLabel1.setFont(new java.awt.Font("Broadway", 3, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("ALOJAMIENTOS");
+        jDesktopPane1.add(jLabel1);
+        jLabel1.setBounds(370, 50, 230, 50);
+
+        jBotonNuevo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jBotonNuevo.setText("Nuevo");
+        jBotonNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBotonNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBotonNuevoActionPerformed(evt);
+            }
+        });
+        jDesktopPane1.add(jBotonNuevo);
+        jBotonNuevo.setBounds(300, 510, 110, 33);
+
+        jBotonGuardar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jBotonGuardar.setText("Guardar");
+        jBotonGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBotonGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBotonGuardarActionPerformed(evt);
+            }
+        });
+        jDesktopPane1.add(jBotonGuardar);
+        jBotonGuardar.setBounds(410, 510, 100, 33);
+
+        jBotonActivar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jBotonActivar.setText("Activar");
+        jBotonActivar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBotonActivar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBotonActivarActionPerformed(evt);
+            }
+        });
+        jDesktopPane1.add(jBotonActivar);
+        jBotonActivar.setBounds(680, 320, 90, 31);
+
+        jLidCiudad.setBackground(new java.awt.Color(255, 255, 255));
+        jLidCiudad.setForeground(new java.awt.Color(255, 255, 255));
+        jLidCiudad.setEnabled(false);
+        jDesktopPane1.add(jLidCiudad);
+        jLidCiudad.setBounds(0, 0, 0, 0);
+
+        getContentPane().add(jDesktopPane1);
+        jDesktopPane1.setBounds(0, 0, 800, 610);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBotonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonModificarActionPerformed
-        Alojamiento alojamiento = new Alojamiento();
-        try {
-            Integer id = Integer.parseInt(jTId.getText());
-            int idCD = Integer.parseInt(jTIdCiudadDest.getText());
-            TipoAloj tipoAloj = (TipoAloj) jComboTipoAloj.getSelectedItem();
-            String tipoAl = tipoAloj.name();//parseo tipo tipoAlojamiento a String 
-            TipoServ serv = (TipoServ) jComboTipoServ.getSelectedItem();
-            String servicio = serv.name();//parseo tipo tipoServicio a String;
-            LocalDate fecIng = jDateFechaIng.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();// como declarar estas variables
-            LocalDate fecSal = jDateFechaSalida.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            Boolean estado = true;
-            double importe = Double.parseDouble(jTImporteDiario.getText());
-            Ciudad cD = ciudadData.buscarCiudad(idCD);
-            jTNombreCiudad.setText(cD.getNombre());
-            Alojamiento aloja = alojamientoData.buscarAlojamiento(id);
-            if (id == aloja.getIdAlojamiento()) {
-                aloja.setTipoAlojamiento(tipoAl);
-                aloja.setFechaIn(fecIng);
-                aloja.setFechaOut(fecSal);
-                aloja.setImporteDiario(importe);
-                aloja.setCiudadDest(cD);
-                aloja.setTipoServicio(servicio);
-                aloja.setEstado(estado);
-
-                alojamientoData.modificarAlojamiento(aloja);
-            }
-            jBotonNuevo.setEnabled(true);
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "error" + ex);
-        }
-
+        Disponible_Data buscar = new Disponible_Data();
+        Alojamiento al = new Alojamiento();
+        al.setIdAlojamiento(Integer.parseInt(jTId.getText()));
+        Ciudad_Data buscarC = new Ciudad_Data();
+        Ciudad city = new Ciudad();
+        System.out.println(jLidCiudad.getText());
+        city = buscarC.buscarCiudad(Integer.parseInt(jLidCiudad.getText()));
+        al.setCiudadDest(city);
+        al.setTipoAlojamiento(jComboTipoAloj.getSelectedItem().toString());
+        al.setTipoServicio(jComboTipoServ.getSelectedItem().toString());
+        al.setImporteDiario(Double.parseDouble(jTImporteDiario.getText()));
+        al.setEstado(true);
+        buscar.modificarAlojamiento(al);
+        limpiarCampos();
+        bloquearCampos();
     }//GEN-LAST:event_jBotonModificarActionPerformed
 
-    private void jBotonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonNuevoActionPerformed
-        activarCampos();
-        limpiarCampos();
-        alojamiento = null;
-        jTId.setEnabled(false);
-        jBotonNuevo.setEnabled(true);
-        jBotonGuardar.setEnabled(true);
-        jBotonEliminar.setEnabled(false);
-        jBotonModificar.setEnabled(false);
-
-
-    }//GEN-LAST:event_jBotonNuevoActionPerformed
-
-    private void jBotonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonBuscarActionPerformed
-        try {
-            activarCampos();
-            Alojamiento alojamiento = new Alojamiento();
-            int id = Integer.parseInt(jTId.getText());
-            String obtenertipoaloj, obtenerTipoServ;
-            alojamiento = alojamientoData.buscarAlojamiento(id);
-            if (alojamiento != null) {
-                obtenertipoaloj = alojamiento.getTipoAlojamiento();
-                obtenerTipoServ = alojamiento.getTipoServicio();
-                jDateFechaIng.setDate(java.sql.Date.valueOf(alojamiento.getFechaIn()));
-                jDateFechaSalida.setDate(java.sql.Date.valueOf(alojamiento.getFechaOut()));
-                jTImporteDiario.setText(alojamiento.getImporteDiario() + "");
-                jTIdCiudadDest.setText(alojamiento.getCiudadDest().getIdCiudad() + "");
-                ciudad = ciudadData.buscarCiudad(alojamiento.getCiudadDest().getIdCiudad());
-                jTNombreCiudad.setText(ciudad.getNombre());
-                jComboTipoAloj.getModel().setSelectedItem(alojamiento.getTipoAlojamiento());
-                jComboTipoServ.getModel().setSelectedItem(alojamiento.getTipoServicio());
-                //CARGA LA TABLA CON LOS DATOS DEL FORMULARIO
-                Object[] fila = {id, obtenertipoaloj, obtenerTipoServ, alojamiento.getFechaIn(), alojamiento.getFechaOut(), alojamiento.getImporteDiario(), ciudad.getNombre()};
-                modelo.addRow(fila);
-                jTablaAlojamiento.repaint();
-                jBotonGuardar.setEnabled(true);
-                jBotonEliminar.setEnabled(true);
-            }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Debe ingresar solo números para el Id ");
-            jTId.requestFocus();
-            limpiarCampos();
-            jBotonGuardar.setEnabled(false);
-        } catch (NullPointerException ex) {
-            jTId.setText("");
-            jBotonGuardar.setEnabled(false);
-        }
-        jTId.requestFocus();
-        jBotonNuevo.setEnabled(true);
-        jBotonGuardar.setEnabled(false);
-
-    }//GEN-LAST:event_jBotonBuscarActionPerformed
-
-    private void jBotonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonGuardarActionPerformed
-
-        jTId.setEnabled(false);
-        TipoAloj tipoAloj = (TipoAloj) jComboTipoAloj.getSelectedItem();
-        String tipoAl = tipoAloj.name();//parseo tipo tipoAlojamiento a String 
-        TipoServ serv = (TipoServ) jComboTipoServ.getSelectedItem();
-        String servicio = serv.name();//parseo tipo tipoAlojamiento a String 
-        LocalDate fecIng = jDateFechaIng.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();// como declarar estas variables
-        LocalDate fecSal = jDateFechaSalida.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        Boolean estado = true;
-        double importe = Double.parseDouble(jTImporteDiario.getText());
-        int destino = Integer.parseInt(jTIdCiudadDest.getText());
-        Ciudad ciudadDes = ciudadData.buscarCiudad(destino);
-        if (alojamiento == null) {
-            alojamiento = new Alojamiento(tipoAl, fecIng, fecSal, estado, servicio, importe, ciudadDes);
-            alojamientoData.guardarAlojamiento(alojamiento);
-            jBotonNuevo.setSelected(false);
-        }
-
-        limpiarCampos();
-        desactivarCampos();
-        jTId.requestFocus();
-        jTId.setEnabled(true);
-        jBotonNuevo.setEnabled(true);
-        jBotonModificar.setEnabled(true);
-
-    }//GEN-LAST:event_jBotonGuardarActionPerformed
-
     private void jBotonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonEliminarActionPerformed
-        int id = Integer.parseInt(jTId.getText());
-        String TipoAlojamiento = (String) jComboTipoAloj.getSelectedItem();
-        LocalDate fI = jDateFechaIng.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDate fS = jDateFechaSalida.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        String tServ = (String) jComboTipoServ.getSelectedItem();
-        Double importe = Double.parseDouble(jTImporteDiario.getText());
-        int idCiudadD = Integer.parseInt(jTIdCiudadDest.getText());
-        Ciudad ciu = ciudadData.buscarCiudad(idCiudadD);
-        if (alojamiento == null) {
-            alojamiento = new Alojamiento(TipoAlojamiento, fI, fS, false, tServ, importe, ciu);
-            int respuesta = JOptionPane.showConfirmDialog(null, "Esta por borrar un Alojamienot ¿Quieres continuar?", "Confirmación", JOptionPane.YES_NO_OPTION);
-            if (respuesta == JOptionPane.YES_OPTION) {
-                alojamientoData.eliminarAlojamiento(id);
-                limpiarCampos();
-                activarCampos();
-                jTId.requestFocus();
-            }
-        }
+        Disponible_Data buscar = new Disponible_Data();
+        buscar.eliminarAlojamiento(Integer.parseInt(jTId.getText()));
+        limpiarCampos();
+        bloquearCampos();
     }//GEN-LAST:event_jBotonEliminarActionPerformed
 
     private void closeCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeCiudadActionPerformed
         this.dispose();
     }//GEN-LAST:event_closeCiudadActionPerformed
 
+    private void jBotonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonCleanActionPerformed
+        limpiarCampos();
+        bloquearCampos();
+    }//GEN-LAST:event_jBotonCleanActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jDesktopPane1.repaint();
+        popupAlojamiento popupAlojamiento = new popupAlojamiento();
+        popupAlojamiento.setVisible(true);
+        jDesktopPane1.add(popupAlojamiento);
+        jDesktopPane1.moveToFront(popupAlojamiento);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jBotonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonBuscarActionPerformed
+        Disponible_Data buscar = new Disponible_Data();
+        Alojamiento al = buscar.buscarAlojamiento(Integer.parseInt(jTId.getText()));
+        jTNombreCiudad.setText(al.getCiudadDest().getNombre());
+        jComboTipoAloj.getModel().setSelectedItem(al.getTipoAlojamiento());
+        jComboTipoServ.getModel().setSelectedItem(al.getTipoServicio());
+        jTImporteDiario.setText(al.getImporteDiario() + "");
+        habilitarCampos();
+    }//GEN-LAST:event_jBotonBuscarActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jDesktopPane1.repaint();
+        popupAlojamientoCiudad popupAlojamientoCiudad = new popupAlojamientoCiudad();
+        popupAlojamientoCiudad.setVisible(true);
+        jDesktopPane1.add(popupAlojamientoCiudad);
+        jDesktopPane1.moveToFront(popupAlojamientoCiudad);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jBotonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonGuardarActionPerformed
+        Disponible_Data guardar = new Disponible_Data();
+        Ciudad_Data c = new Ciudad_Data();
+        Ciudad city = c.buscarCiudad(Integer.parseInt(jLidCiudad.getText()));
+        Alojamiento al = new Alojamiento(jComboTipoAloj.getItemAt(jComboTipoAloj.getSelectedIndex()).toString(), jComboTipoServ.getItemAt(jComboTipoServ.getSelectedIndex()).toString(), Double.parseDouble(jTImporteDiario.getText()), city, true);
+        guardar.guardarAlojamiento(al);
+        limpiarCampos();
+        bloquearCampos();
+    }//GEN-LAST:event_jBotonGuardarActionPerformed
+
+    private void jBotonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonNuevoActionPerformed
+        limpiarCampos();
+        habilitarCampos();
+    }//GEN-LAST:event_jBotonNuevoActionPerformed
+
+    private void jBotonActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonActivarActionPerformed
+        limpiarCampos();
+        bloquearCampos();
+        jDesktopPane1.repaint();
+        popupActivarAloja popupActivarAloja = new popupActivarAloja();
+        popupActivarAloja.setVisible(true);
+        jDesktopPane1.add(popupActivarAloja);
+        jDesktopPane1.moveToFront(popupActivarAloja);
+    }//GEN-LAST:event_jBotonActivarActionPerformed
+
+    private void jTIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTIdKeyTyped
+        char caracter = evt.getKeyChar();
+        if ((caracter < '0' || caracter > '9') && (caracter != KeyEvent.VK_BACKSPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTIdKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton closeCiudad;
+    private javax.swing.JButton jBotonActivar;
     private javax.swing.JButton jBotonBuscar;
+    private javax.swing.JButton jBotonClean;
     private javax.swing.JButton jBotonEliminar;
     private javax.swing.JButton jBotonGuardar;
     private javax.swing.JButton jBotonModificar;
     private javax.swing.JButton jBotonNuevo;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<TipoAloj> jComboTipoAloj;
     private javax.swing.JComboBox<TipoServ> jComboTipoServ;
-    private com.toedter.calendar.JDateChooser jDateFechaIng;
-    private com.toedter.calendar.JDateChooser jDateFechaSalida;
-    private javax.swing.JLabel jLCiudadDestino;
+    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLId;
     private javax.swing.JLabel jLImporte;
     private javax.swing.JLabel jLNombreCiudad;
-    private javax.swing.JLabel jLTipoServ;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLTipoServ1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel7;
+    public static javax.swing.JLabel jLidCiudad;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTId;
-    private javax.swing.JTextField jTIdCiudadDest;
+    public static javax.swing.JTextField jTId;
     private javax.swing.JTextField jTImporteDiario;
-    private javax.swing.JTextField jTNombreCiudad;
-    private javax.swing.JTable jTablaAlojamiento;
+    public static javax.swing.JTextField jTNombreCiudad;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel jTipoAloj;
     private javax.swing.JPanel panelLateral1Ciudad;
@@ -462,43 +447,32 @@ public class VentanaAlojamiento extends javax.swing.JInternalFrame {
 
     }
 
-    public void desactivarCampos() {
-
-        jTId.setEnabled(false);
-        jTImporteDiario.setEnabled(false);
-        jTIdCiudadDest.setEnabled(false);
-
-    }
-
-    public void activarCampos() {
-        jTId.setEnabled(true);
-        jTImporteDiario.setEnabled(true);
-        jTIdCiudadDest.setEnabled(true);
-
-    }
-
     public void limpiarCampos() {
         jTId.setText("");
-        jTImporteDiario.setText("");
-        jTIdCiudadDest.setText("");
-        jDateFechaIng.setDate(null);
-        jDateFechaSalida.setDate(null);
+        jTNombreCiudad.setText("");
         jComboTipoAloj.setSelectedIndex(0);
         jComboTipoServ.setSelectedIndex(0);
-        jTNombreCiudad.setText("");
-        modelo.setRowCount(0);
-
+        jTImporteDiario.setText("");
+        jTId.setEnabled(true);
     }
 
-    public void cabeceraTabla() {
-        modelo.addColumn("ID");
-        modelo.addColumn("Tipo Alojamiento");
-        modelo.addColumn("Tipo Servicio");
-        modelo.addColumn("Fecha Ingreso");
-        modelo.addColumn("Fecha Salida");
-        modelo.addColumn("Importe Diario $");
-        modelo.addColumn("Ciudad Destino");
-        jTablaAlojamiento.setModel(modelo);
+    public void habilitarCampos() {
+        jTId.setEnabled(false);
+        jButton2.setEnabled(true);
+        jTNombreCiudad.setEnabled(true);
+        jTImporteDiario.setEnabled(true);
+        jComboTipoAloj.setEnabled(true);
+        jComboTipoServ.setEnabled(true);
+        jBotonGuardar.setEnabled(true);
+    }
+
+    public void bloquearCampos() {
+        jButton2.setEnabled(false);
+        jTNombreCiudad.setEnabled(false);
+        jTImporteDiario.setEnabled(false);
+        jComboTipoAloj.setEnabled(false);
+        jComboTipoServ.setEnabled(false);
+        jBotonGuardar.setEnabled(false);
     }
 
 }
