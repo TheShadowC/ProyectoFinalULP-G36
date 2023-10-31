@@ -101,6 +101,7 @@ public class VentanaPresupuesto extends javax.swing.JInternalFrame {
         jTCheckOUT1 = new javax.swing.JLabel();
         precioAlojT = new javax.swing.JTextField();
         jBotonLimpiar = new javax.swing.JButton();
+        jLTipoTemporada = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(null);
@@ -192,12 +193,12 @@ public class VentanaPresupuesto extends javax.swing.JInternalFrame {
         jTFCD.setEditable(false);
         jTFCD.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jDesktopPane1.add(jTFCD);
-        jTFCD.setBounds(320, 210, 390, 19);
+        jTFCD.setBounds(320, 210, 390, 24);
 
         jTFCO.setEditable(false);
         jTFCO.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jDesktopPane1.add(jTFCO);
-        jTFCO.setBounds(320, 180, 390, 19);
+        jTFCO.setBounds(320, 180, 390, 24);
 
         jBA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lupa.png"))); // NOI18N
         jBA.setBorderPainted(false);
@@ -209,7 +210,7 @@ public class VentanaPresupuesto extends javax.swing.JInternalFrame {
             }
         });
         jDesktopPane1.add(jBA);
-        jBA.setBounds(320, 280, 66, 40);
+        jBA.setBounds(320, 280, 62, 40);
 
         jBCO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lupa.png"))); // NOI18N
         jBCO.setBorderPainted(false);
@@ -221,7 +222,7 @@ public class VentanaPresupuesto extends javax.swing.JInternalFrame {
             }
         });
         jDesktopPane1.add(jBCO);
-        jBCO.setBounds(700, 160, 66, 40);
+        jBCO.setBounds(710, 170, 62, 40);
 
         jBCD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lupa.png"))); // NOI18N
         jBCD.setBorderPainted(false);
@@ -233,7 +234,7 @@ public class VentanaPresupuesto extends javax.swing.JInternalFrame {
             }
         });
         jDesktopPane1.add(jBCD);
-        jBCD.setBounds(710, 200, 66, 40);
+        jBCD.setBounds(710, 210, 62, 40);
 
         idCO.setBackground(new java.awt.Color(255, 255, 255));
         idCO.setForeground(new java.awt.Color(255, 255, 255));
@@ -257,12 +258,12 @@ public class VentanaPresupuesto extends javax.swing.JInternalFrame {
             }
         });
         jDesktopPane1.add(jBP);
-        jBP.setBounds(290, 240, 66, 40);
+        jBP.setBounds(290, 240, 62, 40);
 
         jTFTP.setEditable(false);
         jTFTP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jDesktopPane1.add(jTFTP);
-        jTFTP.setBounds(390, 250, 120, 19);
+        jTFTP.setBounds(390, 250, 120, 24);
 
         jTPasaje.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTPasaje.setText("Pasaje:");
@@ -273,7 +274,7 @@ public class VentanaPresupuesto extends javax.swing.JInternalFrame {
         jTFIP.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTFIP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jDesktopPane1.add(jTFIP);
-        jTFIP.setBounds(620, 250, 90, 19);
+        jTFIP.setBounds(620, 250, 90, 24);
 
         jTImPasaje.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTImPasaje.setText("Importe: $");
@@ -289,17 +290,17 @@ public class VentanaPresupuesto extends javax.swing.JInternalFrame {
             }
         });
         jDesktopPane1.add(jTFCantidadPasajeros);
-        jTFCantidadPasajeros.setBounds(460, 430, 70, 19);
+        jTFCantidadPasajeros.setBounds(460, 440, 70, 24);
 
         jLCantidadPasajeros.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLCantidadPasajeros.setText("Elija la cantidad de pasajeros:");
         jDesktopPane1.add(jLCantidadPasajeros);
-        jLCantidadPasajeros.setBounds(240, 430, 240, 17);
+        jLCantidadPasajeros.setBounds(240, 440, 240, 17);
 
         jTFAl2.setEditable(false);
         jTFAl2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jDesktopPane1.add(jTFAl2);
-        jTFAl2.setBounds(350, 330, 190, 19);
+        jTFAl2.setBounds(350, 330, 190, 24);
 
         jTAl2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTAl2.setText("Tipo Servicio:");
@@ -309,12 +310,12 @@ public class VentanaPresupuesto extends javax.swing.JInternalFrame {
         jTFAl1.setEditable(false);
         jTFAl1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jDesktopPane1.add(jTFAl1);
-        jTFAl1.setBounds(580, 290, 130, 19);
+        jTFAl1.setBounds(560, 290, 130, 24);
 
         jTAl1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTAl1.setText("Tipo Alojamiento:");
         jDesktopPane1.add(jTAl1);
-        jTAl1.setBounds(450, 290, 160, 17);
+        jTAl1.setBounds(430, 290, 160, 17);
 
         jTAl3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTAl3.setText("Importe: $");
@@ -325,13 +326,13 @@ public class VentanaPresupuesto extends javax.swing.JInternalFrame {
         jTFAl3.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTFAl3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jDesktopPane1.add(jTFAl3);
-        jTFAl3.setBounds(620, 330, 90, 19);
+        jTFAl3.setBounds(620, 330, 90, 24);
 
         jTPasaje2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTPasaje2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jTPasaje2.setText("$");
         jDesktopPane1.add(jTPasaje2);
-        jTPasaje2.setBounds(530, 500, 30, 17);
+        jTPasaje2.setBounds(530, 490, 30, 17);
 
         jTCheckIN.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTCheckIN.setText("Seleccionar fecha de CheckIn:");
@@ -340,73 +341,73 @@ public class VentanaPresupuesto extends javax.swing.JInternalFrame {
 
         checkOUT.setEnabled(false);
         jDesktopPane1.add(checkOUT);
-        checkOUT.setBounds(480, 400, 150, 19);
+        checkOUT.setBounds(480, 400, 150, 29);
 
         checkIN.setEnabled(false);
         jDesktopPane1.add(checkIN);
-        checkIN.setBounds(480, 370, 150, 19);
+        checkIN.setBounds(480, 370, 150, 29);
 
         jLAclaracion1.setForeground(new java.awt.Color(204, 0, 0));
         jLAclaracion1.setText("Precio por día.");
         jDesktopPane1.add(jLAclaracion1);
-        jLAclaracion1.setBounds(640, 350, 90, 15);
+        jLAclaracion1.setBounds(640, 350, 90, 16);
 
         temporada1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         temporada1.setForeground(new java.awt.Color(0, 102, 0));
         temporada1.setText("Temporada ALTA");
         jDesktopPane1.add(temporada1);
-        temporada1.setBounds(550, 420, 160, 22);
+        temporada1.setBounds(550, 430, 160, 22);
 
         jTPasaje4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTPasaje4.setText("Pasajes");
         jDesktopPane1.add(jTPasaje4);
-        jTPasaje4.setBounds(350, 520, 120, 17);
+        jTPasaje4.setBounds(350, 510, 120, 17);
 
         jTPasaje5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTPasaje5.setMaximumSize(new java.awt.Dimension(29, 17));
         jTPasaje5.setMinimumSize(new java.awt.Dimension(29, 17));
         jTPasaje5.setPreferredSize(new java.awt.Dimension(29, 17));
         jDesktopPane1.add(jTPasaje5);
-        jTPasaje5.setBounds(470, 500, 29, 17);
+        jTPasaje5.setBounds(470, 490, 29, 17);
 
         jTPasaje6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTPasaje6.setText("días");
         jDesktopPane1.add(jTPasaje6);
-        jTPasaje6.setBounds(490, 500, 40, 17);
+        jTPasaje6.setBounds(490, 490, 40, 17);
 
         jTPasaje7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTPasaje7.setText("Alojamiento por");
         jDesktopPane1.add(jTPasaje7);
-        jTPasaje7.setBounds(350, 500, 120, 17);
+        jTPasaje7.setBounds(350, 490, 120, 17);
 
         jTPasaje8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTPasaje8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jTPasaje8.setText("$");
         jDesktopPane1.add(jTPasaje8);
-        jTPasaje8.setBounds(530, 520, 30, 17);
+        jTPasaje8.setBounds(530, 510, 30, 17);
 
         precioPasajeT.setEditable(false);
         precioPasajeT.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         precioPasajeT.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jDesktopPane1.add(precioPasajeT);
-        precioPasajeT.setBounds(560, 520, 90, 19);
+        precioPasajeT.setBounds(560, 510, 90, 24);
 
         jTPasaje9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTPasaje9.setText("Total");
         jDesktopPane1.add(jTPasaje9);
-        jTPasaje9.setBounds(350, 540, 120, 17);
+        jTPasaje9.setBounds(350, 550, 120, 17);
 
         jTPasaje10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTPasaje10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jTPasaje10.setText("$");
         jDesktopPane1.add(jTPasaje10);
-        jTPasaje10.setBounds(530, 540, 30, 17);
+        jTPasaje10.setBounds(530, 550, 30, 17);
 
         precioTotal.setEditable(false);
         precioTotal.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         precioTotal.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jDesktopPane1.add(precioTotal);
-        precioTotal.setBounds(560, 540, 90, 19);
+        precioTotal.setBounds(560, 550, 90, 24);
 
         jBotonCalcular.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jBotonCalcular.setText("Calcular");
@@ -417,7 +418,7 @@ public class VentanaPresupuesto extends javax.swing.JInternalFrame {
             }
         });
         jDesktopPane1.add(jBotonCalcular);
-        jBotonCalcular.setBounds(670, 380, 90, 25);
+        jBotonCalcular.setBounds(670, 380, 90, 31);
 
         jBotonConfirmar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jBotonConfirmar.setText("Confirmar");
@@ -428,7 +429,7 @@ public class VentanaPresupuesto extends javax.swing.JInternalFrame {
             }
         });
         jDesktopPane1.add(jBotonConfirmar);
-        jBotonConfirmar.setBounds(670, 500, 100, 25);
+        jBotonConfirmar.setBounds(670, 500, 100, 31);
 
         jTPasaje1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jTPasaje1.setText("Precio total Presupuesto por persona");
@@ -439,13 +440,13 @@ public class VentanaPresupuesto extends javax.swing.JInternalFrame {
         temporada2.setForeground(new java.awt.Color(0, 0, 204));
         temporada2.setText("Temporada MEDIA");
         jDesktopPane1.add(temporada2);
-        temporada2.setBounds(550, 420, 180, 17);
+        temporada2.setBounds(560, 430, 180, 17);
 
         temporada3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         temporada3.setForeground(new java.awt.Color(153, 153, 153));
         temporada3.setText("Temporada BAJA");
         jDesktopPane1.add(temporada3);
-        temporada3.setBounds(550, 420, 160, 22);
+        temporada3.setBounds(560, 430, 160, 22);
 
         jTCheckOUT1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTCheckOUT1.setText("Seleccionar fecha de CheckOut:");
@@ -456,7 +457,7 @@ public class VentanaPresupuesto extends javax.swing.JInternalFrame {
         precioAlojT.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         precioAlojT.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jDesktopPane1.add(precioAlojT);
-        precioAlojT.setBounds(560, 500, 90, 19);
+        precioAlojT.setBounds(560, 490, 90, 24);
 
         jBotonLimpiar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jBotonLimpiar.setText("Limpiar");
@@ -467,10 +468,20 @@ public class VentanaPresupuesto extends javax.swing.JInternalFrame {
             }
         });
         jDesktopPane1.add(jBotonLimpiar);
-        jBotonLimpiar.setBounds(670, 530, 100, 25);
+        jBotonLimpiar.setBounds(670, 530, 100, 31);
+
+        jLTipoTemporada.setBackground(new java.awt.Color(255, 255, 255));
+        jLTipoTemporada.setForeground(new java.awt.Color(255, 255, 255));
+        jLTipoTemporada.setText("jLabel2");
+        jLTipoTemporada.setEnabled(false);
+        jLTipoTemporada.setMaximumSize(new java.awt.Dimension(0, 0));
+        jLTipoTemporada.setMinimumSize(new java.awt.Dimension(0, 0));
+        jLTipoTemporada.setPreferredSize(new java.awt.Dimension(0, 0));
+        jDesktopPane1.add(jLTipoTemporada);
+        jLTipoTemporada.setBounds(0, 0, 0, 0);
 
         getContentPane().add(jDesktopPane1);
-        jDesktopPane1.setBounds(0, 0, 800, 670);
+        jDesktopPane1.setBounds(0, 0, 800, 600);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -519,10 +530,10 @@ public class VentanaPresupuesto extends javax.swing.JInternalFrame {
             long difference_In_Time = checkOUT.getDate().getTime() - checkIN.getDate().getTime();
             long difference_In_Days = (difference_In_Time / (1000 * 60 * 60 * 24)) % 365;
             jTPasaje5.setText(difference_In_Days + "");
-            precioAlojT.setText(difference_In_Days * Double.parseDouble(jTFAl3.getText()) + "");
-            precioPasajeT.setText(jTFIP.getText());
+            precioAlojT.setText(calcularTemporada(difference_In_Days * Double.parseDouble(jTFAl3.getText()), checkIN.getDate()) + "");
+            precioPasajeT.setText(calcularTemporada(Double.parseDouble(jTFIP.getText()), checkIN.getDate()).toString());
             Double total = Double.parseDouble(precioAlojT.getText()) + Double.parseDouble(precioPasajeT.getText());
-            total = calcularTemporada(total, checkIN.getDate());
+            //total = calcularTemporada(total, checkIN.getDate());
             precioTotal.setText(total * Integer.parseInt(jTFCantidadPasajeros.getText()) + "");
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(null, "Debe completar todos los campos para calcular");
@@ -547,6 +558,9 @@ public class VentanaPresupuesto extends javax.swing.JInternalFrame {
         Alojamiento_Data guardarAlojamientoPaquete = new Alojamiento_Data();
         guardarAlojamientoPaquete.guardarAlojamiento(alojamientoPaquete);
         p2.setAlojamiento(alojamientoPaquete);
+        p2.setnPersonas(Integer.parseInt(jTFCantidadPasajeros.getText()));
+        p2.setTipoTemporada(jLTipoTemporada.getText());
+        p2.setPrecio(Double.parseDouble(precioTotal.getText()));
         p2.isEstado(true);
         p1.guardarPaquete(p2);
     }//GEN-LAST:event_jBotonConfirmarActionPerformed
@@ -587,6 +601,7 @@ public class VentanaPresupuesto extends javax.swing.JInternalFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     public static javax.swing.JLabel jLAclaracion1;
     private javax.swing.JLabel jLCantidadPasajeros;
+    private static javax.swing.JLabel jLTipoTemporada;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jTAl1;
@@ -651,6 +666,7 @@ public class VentanaPresupuesto extends javax.swing.JInternalFrame {
         temporada2.setVisible(false);
         temporada3.setVisible(false);
         jTFCantidadPasajeros.setText("");
+        jLTipoTemporada.setText("");
     }
 
     private Double calcularTemporada(Double total, Date inicio) {
@@ -658,21 +674,26 @@ public class VentanaPresupuesto extends javax.swing.JInternalFrame {
             case 0:
                 total = total * 1.3;
                 temporada1.setVisible(true);
+                jLTipoTemporada.setText("Temporada Alta");
                 return total;
             case 1:
                 total = total * 1.15;
                 temporada2.setVisible(true);
+                jLTipoTemporada.setText("Temporada Media");
                 return total;
             case 5:
                 total = total * 1.3;
                 temporada1.setVisible(true);
+                jLTipoTemporada.setText("Temporada Alta");
                 return total;
             case 6:
                 total = total * 1.15;
                 temporada2.setVisible(true);
+                jLTipoTemporada.setText("Temporada Media");
                 return total;
             default:
                 temporada3.setVisible(true);
+                jLTipoTemporada.setText("Temporada Baja");
                 return total;
         }
     }

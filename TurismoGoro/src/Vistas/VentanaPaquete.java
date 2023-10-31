@@ -1,12 +1,10 @@
 package Vistas;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.regex.Pattern;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+import Popups.*;
 import AccesoADatos.*;
 import Entidades.*;
+import com.sun.glass.events.KeyEvent;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,24 +12,15 @@ import Entidades.*;
  */
 public class VentanaPaquete extends javax.swing.JInternalFrame {
 
-    private Pasaje_Data pasajeData = new Pasaje_Data();
-    private Pasaje pasaje = null;
-    private Ciudad ciudad = new Ciudad();
-    private Ciudad_Data ciudadData = new Ciudad_Data();
-    private Alojamiento_Data alojamientoData = new Alojamiento_Data();
-    private Alojamiento alojamiento = null;
-    private Paquete_Data paqueteData = new Paquete_Data();
-    private Paquete paquete;
-
     /**
      * Creates new form VentanaPaquete
      */
     public VentanaPaquete() {
         initComponents();
+        ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null); //Elimina encabezado de ventana
+        limpiarCampos();
         desactivarCampos();
-        jTIdPaquete.setEnabled(true);
-        jBotonModificar.setEnabled(false);
-        jBotonEliminar.setEnabled(false);
+
     }
 
     /**
@@ -43,406 +32,408 @@ public class VentanaPaquete extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDesktopPane1 = new javax.swing.JDesktopPane();
+        panelLateral2Ciudad = new javax.swing.JPanel();
+        closeCiudad = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        panelLateral1Ciudad = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
         jLIdPaquete = new javax.swing.JLabel();
-        jTIdPaquete = new javax.swing.JTextField();
+        jTFIdPaquete = new javax.swing.JTextField();
+        buscarPaquete = new javax.swing.JButton();
+        clearButton = new javax.swing.JButton();
         jBotonBuscar = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jTIdCiudadOrigen = new javax.swing.JTextField();
-        jTIdCiudadDestino = new javax.swing.JTextField();
-        jLIdCiudadDestino = new javax.swing.JLabel();
-        jLNombreOrigen = new javax.swing.JLabel();
-        jTNombreOrigen = new javax.swing.JTextField();
-        jLNombreDestino = new javax.swing.JLabel();
-        jTNombreDestino = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
-        jLIdAlojamiento = new javax.swing.JLabel();
-        jTIdAlojamiento = new javax.swing.JTextField();
-        jLTipoAlojamiento = new javax.swing.JLabel();
-        jTTipoAlojamiento = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
-        jLIdPasaje = new javax.swing.JLabel();
-        jTIdPasaje = new javax.swing.JTextField();
-        jLTipoTransporte = new javax.swing.JLabel();
-        jTTipoTransporte = new javax.swing.JTextField();
-        jPanel5 = new javax.swing.JPanel();
-        jBotonNuevo = new javax.swing.JButton();
-        jBotonGuardar = new javax.swing.JButton();
-        jBotonModificar = new javax.swing.JButton();
-        jBotonSalir = new javax.swing.JButton();
         jBotonEliminar = new javax.swing.JButton();
+        jBotonActivar = new javax.swing.JButton();
+        jLCO = new javax.swing.JLabel();
+        jTFCO = new javax.swing.JTextField();
+        jLCD = new javax.swing.JLabel();
+        jTFCD = new javax.swing.JTextField();
+        jTFTransporte = new javax.swing.JTextField();
+        jLTransporte = new javax.swing.JLabel();
+        jLAlojamiento = new javax.swing.JLabel();
+        jTFAlojamiento = new javax.swing.JTextField();
+        jLServicio = new javax.swing.JLabel();
+        jTFServicio = new javax.swing.JTextField();
+        jLCheckIN = new javax.swing.JLabel();
+        jTFCheckIn = new javax.swing.JTextField();
+        jLCheckOut = new javax.swing.JLabel();
+        jTFCheckOut = new javax.swing.JTextField();
+        jLTotal = new javax.swing.JLabel();
+        JTFTotal = new javax.swing.JTextField();
+        jLTipoTemporada = new javax.swing.JLabel();
+        jTFnPersonas = new javax.swing.JTextField();
+        jLnPersonas = new javax.swing.JLabel();
+        jTFTipoTemporada = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+        setBorder(null);
         setTitle("Paquete");
+        setMaximumSize(new java.awt.Dimension(800, 600));
+        setMinimumSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(800, 600));
+        getContentPane().setLayout(null);
 
-        jLIdPaquete.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLIdPaquete.setText("ID Paquete: ");
+        jDesktopPane1.setAlignmentX(0.0F);
+        jDesktopPane1.setAlignmentY(0.0F);
+        jDesktopPane1.setMaximumSize(new java.awt.Dimension(800, 600));
+        jDesktopPane1.setMinimumSize(new java.awt.Dimension(800, 600));
 
-        jTIdPaquete.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        panelLateral2Ciudad.setBackground(new java.awt.Color(255, 204, 51));
 
-        jBotonBuscar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        javax.swing.GroupLayout panelLateral2CiudadLayout = new javax.swing.GroupLayout(panelLateral2Ciudad);
+        panelLateral2Ciudad.setLayout(panelLateral2CiudadLayout);
+        panelLateral2CiudadLayout.setHorizontalGroup(
+            panelLateral2CiudadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 229, Short.MAX_VALUE)
+        );
+        panelLateral2CiudadLayout.setVerticalGroup(
+            panelLateral2CiudadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 450, Short.MAX_VALUE)
+        );
+
+        jDesktopPane1.add(panelLateral2Ciudad);
+        panelLateral2Ciudad.setBounds(0, 171, 229, 450);
+
+        closeCiudad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/flechaAtras.png"))); // NOI18N
+        closeCiudad.setText("Atrás");
+        closeCiudad.setAlignmentY(0.0F);
+        closeCiudad.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        closeCiudad.setBorderPainted(false);
+        closeCiudad.setContentAreaFilled(false);
+        closeCiudad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        closeCiudad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeCiudadActionPerformed(evt);
+            }
+        });
+        jDesktopPane1.add(closeCiudad);
+        closeCiudad.setBounds(670, 20, 90, 38);
+
+        jLabel1.setFont(new java.awt.Font("Broadway", 3, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("PAQUETES");
+        jDesktopPane1.add(jLabel1);
+        jLabel1.setBounds(370, 50, 230, 50);
+
+        panelLateral1Ciudad.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/logo2.png"))); // NOI18N
+
+        javax.swing.GroupLayout panelLateral1CiudadLayout = new javax.swing.GroupLayout(panelLateral1Ciudad);
+        panelLateral1Ciudad.setLayout(panelLateral1CiudadLayout);
+        panelLateral1CiudadLayout.setHorizontalGroup(
+            panelLateral1CiudadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLateral1CiudadLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel7)
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
+        panelLateral1CiudadLayout.setVerticalGroup(
+            panelLateral1CiudadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLateral1CiudadLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jDesktopPane1.add(panelLateral1Ciudad);
+        panelLateral1Ciudad.setBounds(0, 0, 229, 172);
+
+        jLIdPaquete.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLIdPaquete.setText("Id Paquete: ");
+        jDesktopPane1.add(jLIdPaquete);
+        jLIdPaquete.setBounds(270, 180, 100, 17);
+
+        jTFIdPaquete.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTFIdPaquete.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jTFIdPaquete.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFIdPaqueteKeyTyped(evt);
+            }
+        });
+        jDesktopPane1.add(jTFIdPaquete);
+        jTFIdPaquete.setBounds(360, 180, 104, 20);
+
+        buscarPaquete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lupa.png"))); // NOI18N
+        buscarPaquete.setBorderPainted(false);
+        buscarPaquete.setContentAreaFilled(false);
+        buscarPaquete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buscarPaquete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarPaqueteActionPerformed(evt);
+            }
+        });
+        jDesktopPane1.add(buscarPaquete);
+        buscarPaquete.setBounds(470, 170, 30, 30);
+
+        clearButton.setText("Limpiar");
+        clearButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
+        jDesktopPane1.add(clearButton);
+        clearButton.setBounds(680, 220, 90, 32);
+
+        jBotonBuscar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jBotonBuscar.setText("Buscar");
+        jBotonBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBotonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBotonBuscarActionPerformed(evt);
             }
         });
+        jDesktopPane1.add(jBotonBuscar);
+        jBotonBuscar.setBounds(680, 180, 90, 31);
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
-        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
-
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel3.setText("Id Ciudad Origen: ");
-
-        jTIdCiudadOrigen.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-
-        jTIdCiudadDestino.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-
-        jLIdCiudadDestino.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLIdCiudadDestino.setText("Id Ciudad Destino: ");
-
-        jLNombreOrigen.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLNombreOrigen.setText("Nombre Origen: ");
-
-        jTNombreOrigen.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-
-        jLNombreDestino.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLNombreDestino.setText("Nombre Destino: ");
-
-        jTNombreDestino.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(26, 26, 26)
-                        .addComponent(jTIdCiudadOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLIdCiudadDestino)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTIdCiudadDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(52, 52, 52)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLNombreOrigen)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTNombreOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLNombreDestino)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTNombreDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLNombreDestino)
-                            .addComponent(jTIdCiudadDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLIdCiudadDestino))
-                        .addGap(103, 103, 103))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jTNombreOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jTIdCiudadOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLNombreOrigen)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jTNombreDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(106, 106, 106))))
-        );
-
-        jPanel2.setBackground(new java.awt.Color(204, 255, 153));
-
-        jLIdAlojamiento.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLIdAlojamiento.setText("Id Alojamiento: ");
-
-        jTIdAlojamiento.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-
-        jLTipoAlojamiento.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLTipoAlojamiento.setText("Tipo Alojamiento: ");
-
-        jTTipoAlojamiento.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLIdAlojamiento)
-                .addGap(27, 27, 27)
-                .addComponent(jTIdAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLTipoAlojamiento)
-                .addGap(37, 37, 37)
-                .addComponent(jTTipoAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLIdAlojamiento)
-                    .addComponent(jTIdAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLTipoAlojamiento)
-                    .addComponent(jTTipoAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19))
-        );
-
-        jPanel3.setBackground(new java.awt.Color(204, 204, 255));
-
-        jLIdPasaje.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLIdPasaje.setText("Id Pasaje: ");
-
-        jTIdPasaje.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-
-        jLTipoTransporte.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLTipoTransporte.setText("Tipo Transporte: ");
-
-        jTTipoTransporte.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLIdPasaje)
-                .addGap(27, 27, 27)
-                .addComponent(jTIdPasaje, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(jLTipoTransporte)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTTipoTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLIdPasaje)
-                    .addComponent(jTIdPasaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLTipoTransporte)
-                    .addComponent(jTTipoTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19))
-        );
-
-        jPanel5.setBackground(new java.awt.Color(204, 204, 204));
-
-        jBotonNuevo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jBotonNuevo.setText("Nuevo");
-        jBotonNuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBotonNuevoActionPerformed(evt);
-            }
-        });
-
-        jBotonGuardar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jBotonGuardar.setText("Guardar");
-        jBotonGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBotonGuardarActionPerformed(evt);
-            }
-        });
-
-        jBotonModificar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jBotonModificar.setText("Modificar");
-
-        jBotonSalir.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jBotonSalir.setText("Salir");
-        jBotonSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBotonSalirActionPerformed(evt);
-            }
-        });
-
-        jBotonEliminar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jBotonEliminar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jBotonEliminar.setText("Eliminar");
+        jBotonEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBotonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBotonEliminarActionPerformed(evt);
+            }
+        });
+        jDesktopPane1.add(jBotonEliminar);
+        jBotonEliminar.setBounds(590, 530, 100, 31);
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jBotonNuevo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBotonGuardar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBotonModificar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBotonEliminar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBotonSalir)
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBotonNuevo)
-                    .addComponent(jBotonGuardar)
-                    .addComponent(jBotonModificar)
-                    .addComponent(jBotonSalir)
-                    .addComponent(jBotonEliminar))
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
+        jBotonActivar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jBotonActivar.setText("Activar");
+        jBotonActivar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBotonActivar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBotonActivarActionPerformed(evt);
+            }
+        });
+        jDesktopPane1.add(jBotonActivar);
+        jBotonActivar.setBounds(700, 530, 90, 31);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLIdPaquete)
-                        .addGap(24, 24, 24)
-                        .addComponent(jTIdPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBotonBuscar)
-                        .addGap(32, 32, 32))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLIdPaquete)
-                    .addComponent(jTIdPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBotonBuscar))
-                .addGap(21, 21, 21)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLCO.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLCO.setText("Ciudad Origen:");
+        jDesktopPane1.add(jLCO);
+        jLCO.setBounds(260, 220, 120, 17);
+
+        jTFCO.setEditable(false);
+        jTFCO.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jDesktopPane1.add(jTFCO);
+        jTFCO.setBounds(390, 220, 260, 23);
+
+        jLCD.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLCD.setText("Ciudad Destino:");
+        jDesktopPane1.add(jLCD);
+        jLCD.setBounds(260, 250, 120, 17);
+
+        jTFCD.setEditable(false);
+        jTFCD.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jDesktopPane1.add(jTFCD);
+        jTFCD.setBounds(390, 250, 260, 23);
+
+        jTFTransporte.setEditable(false);
+        jTFTransporte.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jDesktopPane1.add(jTFTransporte);
+        jTFTransporte.setBounds(390, 280, 260, 23);
+
+        jLTransporte.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLTransporte.setText("Transporte:");
+        jDesktopPane1.add(jLTransporte);
+        jLTransporte.setBounds(260, 280, 120, 17);
+
+        jLAlojamiento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLAlojamiento.setText("Alojamiento:");
+        jDesktopPane1.add(jLAlojamiento);
+        jLAlojamiento.setBounds(260, 310, 120, 17);
+
+        jTFAlojamiento.setEditable(false);
+        jTFAlojamiento.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jDesktopPane1.add(jTFAlojamiento);
+        jTFAlojamiento.setBounds(390, 310, 260, 23);
+
+        jLServicio.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLServicio.setText("Servicio:");
+        jDesktopPane1.add(jLServicio);
+        jLServicio.setBounds(260, 340, 120, 17);
+
+        jTFServicio.setEditable(false);
+        jTFServicio.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jDesktopPane1.add(jTFServicio);
+        jTFServicio.setBounds(390, 340, 260, 23);
+
+        jLCheckIN.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLCheckIN.setText("Check In:");
+        jDesktopPane1.add(jLCheckIN);
+        jLCheckIN.setBounds(260, 370, 120, 17);
+
+        jTFCheckIn.setEditable(false);
+        jTFCheckIn.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jDesktopPane1.add(jTFCheckIn);
+        jTFCheckIn.setBounds(390, 370, 260, 23);
+
+        jLCheckOut.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLCheckOut.setText("Check Out:");
+        jDesktopPane1.add(jLCheckOut);
+        jLCheckOut.setBounds(260, 400, 120, 17);
+
+        jTFCheckOut.setEditable(false);
+        jTFCheckOut.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jDesktopPane1.add(jTFCheckOut);
+        jTFCheckOut.setBounds(390, 400, 260, 23);
+
+        jLTotal.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLTotal.setText("Precio:    $");
+        jDesktopPane1.add(jLTotal);
+        jLTotal.setBounds(450, 490, 120, 17);
+
+        JTFTotal.setEditable(false);
+        JTFTotal.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jDesktopPane1.add(JTFTotal);
+        JTFTotal.setBounds(530, 490, 130, 23);
+
+        jLTipoTemporada.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLTipoTemporada.setText("Temporada:");
+        jDesktopPane1.add(jLTipoTemporada);
+        jLTipoTemporada.setBounds(260, 430, 120, 17);
+
+        jTFnPersonas.setEditable(false);
+        jTFnPersonas.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jDesktopPane1.add(jTFnPersonas);
+        jTFnPersonas.setBounds(630, 430, 40, 23);
+
+        jLnPersonas.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLnPersonas.setText("Personas:");
+        jDesktopPane1.add(jLnPersonas);
+        jLnPersonas.setBounds(550, 430, 120, 17);
+
+        jTFTipoTemporada.setEditable(false);
+        jTFTipoTemporada.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jDesktopPane1.add(jTFTipoTemporada);
+        jTFTipoTemporada.setBounds(390, 430, 150, 23);
+
+        getContentPane().add(jDesktopPane1);
+        jDesktopPane1.setBounds(0, 0, 800, 600);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBotonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonSalirActionPerformed
-        dispose();
-    }//GEN-LAST:event_jBotonSalirActionPerformed
+    private void closeCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeCiudadActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_closeCiudadActionPerformed
 
-    private void jBotonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonNuevoActionPerformed
-        activarCampos();
+    private void jTFIdPaqueteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFIdPaqueteKeyTyped
+        char caracter = evt.getKeyChar();
+        if ((caracter < '0' || caracter > '9') && (caracter != KeyEvent.VK_BACKSPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTFIdPaqueteKeyTyped
+
+    private void buscarPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPaqueteActionPerformed
+        jDesktopPane1.repaint();
+        popupPaqueteBuscar popupPaqueteBuscar = new popupPaqueteBuscar();
+        popupPaqueteBuscar.setVisible(true);
+        jDesktopPane1.add(popupPaqueteBuscar);
+        jDesktopPane1.moveToFront(popupPaqueteBuscar);
+    }//GEN-LAST:event_buscarPaqueteActionPerformed
+
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
         limpiarCampos();
-        paquete = null;
-        jTIdPaquete.setEnabled(false);
-        jBotonNuevo.setEnabled(true);
-        jBotonGuardar.setEnabled(true);
-        jBotonEliminar.setEnabled(false);
-        jBotonModificar.setEnabled(false); 
-    }//GEN-LAST:event_jBotonNuevoActionPerformed
+        desactivarCampos();
+    }//GEN-LAST:event_clearButtonActionPerformed
 
-    private void jBotonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonGuardarActionPerformed
-      
-        
-    }//GEN-LAST:event_jBotonGuardarActionPerformed
+    private void jBotonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonEliminarActionPerformed
+        Paquete_Data p = new Paquete_Data();
+        p.eliminarPaquete(Integer.parseInt(jTFIdPaquete.getText()));
+        clearButtonActionPerformed(evt);
+    }//GEN-LAST:event_jBotonEliminarActionPerformed
 
     private void jBotonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonBuscarActionPerformed
-        try{
-            Integer id=Integer.parseInt(jTIdPaquete.getText()); 
-            paquete=paqueteData.buscarPaquete2(id);
-            if(paquete != null){
-                jTIdCiudadOrigen.setText(paquete.getOrigen().getIdCiudad()+"");
-                jTNombreOrigen.setText(paquete.getOrigen().getNombre());
-                jTIdCiudadDestino.setText(paquete.getDestino().getIdCiudad()+"");
-                jTNombreDestino.setText(paquete.getDestino().getNombre());
-                jTIdAlojamiento.setText(paquete.getAlojamiento().getIdAlojamiento()+"");
-                jTTipoAlojamiento.setText(paquete.getAlojamiento().getTipoAlojamiento());
-                jTIdPasaje.setText(paquete.getPasaje().getIdPasajero()+"");
-                jTTipoTransporte.setText(paquete.getPasaje().getTipoTransporte());
-               }
-               
-        }catch(NumberFormatException es){
-         JOptionPane.showMessageDialog(this, "Debe ingresar un ID valido");}
+        Paquete_Data p = new Paquete_Data();
+        Paquete paquete = new Paquete();
+        try {
+            paquete = p.buscarPaquete2(Integer.parseInt(jTFIdPaquete.getText()));
+            jTFCO.setText(paquete.getOrigen().toString());
+            jTFCD.setText(paquete.getDestino().toString());
+            jTFTransporte.setText(paquete.getPasaje().getTipoTransporte());
+            jTFAlojamiento.setText(paquete.getAlojamiento().getTipoAlojamiento());
+            jTFServicio.setText(paquete.getAlojamiento().getTipoServicio());
+            jTFCheckIn.setText(paquete.getAlojamiento().getFechaIn().toString());
+            jTFCheckOut.setText(paquete.getAlojamiento().getFechaOut().toString());
+            jTFnPersonas.setText(paquete.getnPersonas()+"");
+            jTFTipoTemporada.setText(paquete.getTipoTemporada());
+            JTFTotal.setText(paquete.getPrecio().toString());
+            jBotonEliminar.setEnabled(true);
+        }catch(NullPointerException ex){
+            JOptionPane.showMessageDialog(null, "Debe ingresar un ID de paquete");
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(null, "Debe ingresar un ID de paquete");
+        }
     }//GEN-LAST:event_jBotonBuscarActionPerformed
+
+    private void jBotonActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonActivarActionPerformed
+        jDesktopPane1.repaint();
+        popupPaqueteActivar popupPaqueteActivar = new popupPaqueteActivar();
+        popupPaqueteActivar.setVisible(true);
+        jDesktopPane1.add(popupPaqueteActivar);
+        jDesktopPane1.moveToFront(popupPaqueteActivar);
+    }//GEN-LAST:event_jBotonActivarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JTextField JTFTotal;
+    private javax.swing.JButton buscarPaquete;
+    private javax.swing.JButton clearButton;
+    private javax.swing.JButton closeCiudad;
+    private javax.swing.JButton jBotonActivar;
     private javax.swing.JButton jBotonBuscar;
     private javax.swing.JButton jBotonEliminar;
-    private javax.swing.JButton jBotonGuardar;
-    private javax.swing.JButton jBotonModificar;
-    private javax.swing.JButton jBotonNuevo;
-    private javax.swing.JButton jBotonSalir;
-    private javax.swing.JLabel jLIdAlojamiento;
-    private javax.swing.JLabel jLIdCiudadDestino;
+    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jLAlojamiento;
+    private javax.swing.JLabel jLCD;
+    private javax.swing.JLabel jLCO;
+    private javax.swing.JLabel jLCheckIN;
+    private javax.swing.JLabel jLCheckOut;
     private javax.swing.JLabel jLIdPaquete;
-    private javax.swing.JLabel jLIdPasaje;
-    private javax.swing.JLabel jLNombreDestino;
-    private javax.swing.JLabel jLNombreOrigen;
-    private javax.swing.JLabel jLTipoAlojamiento;
-    private javax.swing.JLabel jLTipoTransporte;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JTextField jTIdAlojamiento;
-    private javax.swing.JTextField jTIdCiudadDestino;
-    private javax.swing.JTextField jTIdCiudadOrigen;
-    private javax.swing.JTextField jTIdPaquete;
-    private javax.swing.JTextField jTIdPasaje;
-    private javax.swing.JTextField jTNombreDestino;
-    private javax.swing.JTextField jTNombreOrigen;
-    private javax.swing.JTextField jTTipoAlojamiento;
-    private javax.swing.JTextField jTTipoTransporte;
+    private javax.swing.JLabel jLServicio;
+    private javax.swing.JLabel jLTipoTemporada;
+    private javax.swing.JLabel jLTotal;
+    private javax.swing.JLabel jLTransporte;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLnPersonas;
+    public static javax.swing.JTextField jTFAlojamiento;
+    public static javax.swing.JTextField jTFCD;
+    public static javax.swing.JTextField jTFCO;
+    public static javax.swing.JTextField jTFCheckIn;
+    public static javax.swing.JTextField jTFCheckOut;
+    public static javax.swing.JTextField jTFIdPaquete;
+    public static javax.swing.JTextField jTFServicio;
+    public static javax.swing.JTextField jTFTipoTemporada;
+    public static javax.swing.JTextField jTFTransporte;
+    public static javax.swing.JTextField jTFnPersonas;
+    private javax.swing.JPanel panelLateral1Ciudad;
+    private javax.swing.JPanel panelLateral2Ciudad;
     // End of variables declaration//GEN-END:variables
 
     public void desactivarCampos() {
-
-        jTIdPasaje.setEnabled(false);
-        jTIdPaquete.setEnabled(false);
-        jTIdCiudadOrigen.setEnabled(false);
-        jTIdCiudadDestino.setEnabled(false);
-        jTIdAlojamiento.setEnabled(false);
+        jBotonEliminar.setEnabled(false);
     }
 
     public void activarCampos() {
-        jTIdPasaje.setEnabled(true);
-        jTIdPaquete.setEnabled(true);
-        jTIdCiudadOrigen.setEnabled(true);
-        jTIdCiudadDestino.setEnabled(true);
-        jTIdAlojamiento.setEnabled(true);
 
     }
 
     public void limpiarCampos() {
-        jTIdPasaje.setText("");
-        jTTipoAlojamiento.setText("");
-        jTIdPaquete.setText("");
-        jTIdCiudadOrigen.setText("");
-        jTNombreOrigen.setText("");
-        jTIdCiudadDestino.setText("");
-        jTNombreDestino.setText("");
-        jTTipoAlojamiento.setText("");
-        jTIdAlojamiento.setText("");
+        jTFIdPaquete.setText("");
+        jTFCO.setText("");
+        jTFCD.setText("");
+        jTFTransporte.setText("");
+        jTFAlojamiento.setText("");
+        jTFServicio.setText("");
+        jTFCheckIn.setText("");
+        jTFCheckOut.setText("");
+        jTFnPersonas.setText("");
+        jTFTipoTemporada.setText("");
+        JTFTotal.setText("");
     }
 }

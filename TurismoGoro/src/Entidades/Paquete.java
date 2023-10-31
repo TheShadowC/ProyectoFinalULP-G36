@@ -11,6 +11,9 @@ public class Paquete {
     private Ciudad destino;
     private Alojamiento alojamiento;
     private Pasaje pasaje;
+    private int nPersonas;
+    private String tipoTemporada;
+    private Double precio;
     private boolean estado;
 
     public Paquete() {
@@ -31,7 +34,18 @@ public class Paquete {
         this.alojamiento = alojamiento;
         this.pasaje = pasaje;
         this.estado = estado;
+    }
 
+    public Paquete(int idPaquete, Ciudad origen, Ciudad destino, Alojamiento alojamiento, Pasaje pasaje, int nPersonas, String tipoTemporada, Double precio, boolean estado) {
+        this.idPaquete = idPaquete;
+        this.origen = origen;
+        this.destino = destino;
+        this.alojamiento = alojamiento;
+        this.pasaje = pasaje;
+        this.nPersonas = nPersonas;
+        this.tipoTemporada = tipoTemporada;
+        this.precio = precio;
+        this.estado = estado;
     }
 
     public int getIdPaquete() {
@@ -72,6 +86,30 @@ public class Paquete {
 
     public void setPasaje(Pasaje pasaje) {
         this.pasaje = pasaje;
+    }
+
+    public int getnPersonas() {
+        return nPersonas;
+    }
+
+    public void setnPersonas(int nPersonas) {
+        this.nPersonas = nPersonas;
+    }
+
+    public String getTipoTemporada() {
+        return tipoTemporada;
+    }
+
+    public void setTipoTemporada(String tipoTemporada) {
+        this.tipoTemporada = tipoTemporada;
+    }
+
+    public Double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Double precio) {
+        this.precio = precio;
     }
 
     public boolean getEstado() {

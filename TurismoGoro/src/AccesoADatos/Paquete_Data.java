@@ -36,9 +36,7 @@ public class Paquete_Data {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            System.out.println("Resulset " + rs.next());
             do {
-                System.out.println("Entre");
                 paquete = new Paquete();
                 alojamiento = alojamientoData.buscarAlojamiento(rs.getInt("idAlojamiento"));
                 Ciudad CO = ciudadData.buscarCiudad(rs.getInt("idCiudadOrigen"));
@@ -49,8 +47,11 @@ public class Paquete_Data {
                 paquete.setDestino(CD);
                 paquete.setOrigen(CO);
                 paquete.setPasaje(pasaje);
+                paquete.setnPersonas(rs.getInt("nPersonas"));
+                paquete.setTipoTemporada(rs.getString("tipoTemporada"));
+                paquete.setPrecio(rs.getDouble("precio"));
                 paquete.isEstado(rs.getBoolean("estado"));
-            }while(rs.next());
+            } while (rs.next());
             // } else {
             //    JOptionPane.showMessageDialog(null, "No existe ese Paquete ");
             // }
@@ -62,14 +63,14 @@ public class Paquete_Data {
     }
 
     public Paquete buscarPaquete2(int id) {
-        
+
         String sql = "SELECT * FROM paquete WHERE estado = 1 AND idPaquete=?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             //System.out.println("Resulset " + rs.next());
-            while(rs.next()){
+            while (rs.next()) {
                 paquete = new Paquete();
                 ciudadData = new Ciudad_Data();
                 alojamientoData = new Alojamiento_Data();
@@ -79,6 +80,11 @@ public class Paquete_Data {
                 paquete.setDestino(ciudadData.buscarCiudad(rs.getInt("idCiudadDestino")));
                 paquete.setAlojamiento(alojamientoData.buscarAlojamiento(rs.getInt("idAlojamiento")));
                 paquete.setPasaje(pasajeData.buscarPasaje(rs.getInt("idPasaje")));
+                paquete.setTipoTemporada(rs.getString("tipoTemporada"));
+                paquete.setnPersonas(rs.getInt("nPersonas"));
+                paquete.setTipoTemporada(rs.getString("tipoTemporada"));
+                paquete.setPrecio(rs.getDouble("precio"));
+                paquete.isEstado(rs.getBoolean("estado"));
             }
             ps.close();
         } catch (SQLException ex) {
@@ -88,19 +94,22 @@ public class Paquete_Data {
     }
 
     public void guardarPaquete(Paquete paquete) {
-        String sql = " INSERT INTO paquete(idCiudadOrigen, idCiudadDestino, idAlojamiento, idPasaje, estado) VALUES (?,?,?,?,?) ";
+        String sql = " INSERT INTO paquete(idCiudadOrigen, idCiudadDestino, idAlojamiento, idPasaje, nPersonas, tipoTemporada, precio, estado) VALUES (?,?,?,?,?,?,?,?) ";
         try {
             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, paquete.getOrigen().getIdCiudad());
             ps.setInt(2, paquete.getDestino().getIdCiudad());
             ps.setInt(3, paquete.getAlojamiento().getIdAlojamiento());
             ps.setInt(4, paquete.getPasaje().getIdPasajero());
-            ps.setBoolean(5, paquete.getEstado());
+            ps.setInt(5, paquete.getnPersonas());
+            ps.setString(6, paquete.getTipoTemporada());
+            ps.setDouble(7, paquete.getPrecio());
+            ps.setBoolean(8, paquete.getEstado());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 paquete.setIdPaquete(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Se generó presupuesto para el paquete id "+paquete.getIdPaquete());
+                JOptionPane.showMessageDialog(null, "Se generó presupuesto para el paquete id " + paquete.getIdPaquete());
             }
             ps.close();
         } catch (SQLException ex) {
@@ -145,5 +154,83 @@ public class Paquete_Data {
 
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Paquete " + ex.getMessage());
         }
+    }
+
+    public List<Paquete> listarPaquetesActivos() {
+        List<Paquete> lista = new ArrayList<>();
+        String sql = "SELECT * FROM paquete WHERE estado = 1";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Paquete paquete = new Paquete();
+                Ciudad_Data c = new Ciudad_Data();
+                Pasaje_Data p = new Pasaje_Data();
+                Alojamiento_Data a = new Alojamiento_Data();
+                paquete.setIdPaquete(rs.getInt("idPaquete"));
+                paquete.setOrigen(c.buscarCiudad(rs.getInt("idCiudadOrigen")));
+                paquete.setDestino(c.buscarCiudad(rs.getInt("idCiudadDestino")));
+                paquete.setPasaje(p.buscarPasaje(rs.getInt("idPasaje")));
+                paquete.setAlojamiento(a.buscarAlojamiento(rs.getInt("idAlojamiento")));
+                paquete.setnPersonas(rs.getInt("nPersonas"));
+                paquete.setTipoTemporada(rs.getString("tipotemporada"));
+                paquete.setPrecio(rs.getDouble("precio"));
+                paquete.isEstado(true);
+                lista.add(paquete);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al Acceder a la Tabla Paquete " + ex.getMessage());
+        }
+        return lista;
+    }
+
+    public List<Paquete> listarPaquetesInactivos() {
+        List<Paquete> lista = new ArrayList<>();
+        String sql = "SELECT * FROM paquete WHERE estado = 0";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Paquete paquete = new Paquete();
+                Ciudad_Data c = new Ciudad_Data();
+                Pasaje_Data p = new Pasaje_Data();
+                Alojamiento_Data a = new Alojamiento_Data();
+                paquete.setIdPaquete(rs.getInt("idPaquete"));
+                paquete.setOrigen(c.buscarCiudad(rs.getInt("idCiudadOrigen")));
+                paquete.setDestino(c.buscarCiudad(rs.getInt("idCiudadDestino")));
+                paquete.setPasaje(p.buscarPasaje(rs.getInt("idPasaje")));
+                paquete.setAlojamiento(a.buscarAlojamiento(rs.getInt("idAlojamiento")));
+                paquete.setnPersonas(rs.getInt("nPersonas"));
+                paquete.setTipoTemporada(rs.getString("tipotemporada"));
+                paquete.setPrecio(rs.getDouble("precio"));
+                paquete.isEstado(true);
+                lista.add(paquete);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al Acceder a la Tabla Paquete " + ex.getMessage());
+        }
+        return lista;
+    }
+
+    public void activarPaquete(int id) {
+
+        try {
+            String sql = "UPDATE paquete SET estado=1 WHERE idPaquete=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            int fila = ps.executeUpdate();
+            if (fila > 1) {
+                JOptionPane.showMessageDialog(null, "Se elimino el paquete.");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Paquete " + ex.getMessage());
+        }
+
     }
 }
